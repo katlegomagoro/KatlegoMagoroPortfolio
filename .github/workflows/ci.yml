@@ -1,0 +1,41 @@
+name: CI
+
+# Build + lint check only — this workflow never deploys.
+# Cloudflare Pages' own Git integration watches these same branches
+# and performs the actual deploy per ARCHITECTURE.md Section 4.4.
+on:
+  push:
+    branches: [develop, uat, main]
+  pull_request:
+    branches: [develop, uat, main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: app
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Format check
+        run: npm run format:check
