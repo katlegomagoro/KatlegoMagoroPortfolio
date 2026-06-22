@@ -1,0 +1,80 @@
+{
+  "_comment": "STRUCTURE FOR REVIEW ONLY — placeholder values throughout. Nothing here is final. Once approved, real CV content gets filled in.",
+
+  "basics": {
+    "name": "Full Name",
+    "title": "Job Title / Headline",
+    "location": "City, Country",
+    "email": "you@example.com",
+    "phone": "+27 00 000 0000",
+    "links": {
+      "linkedin": "https://linkedin.com/in/...",
+      "github": "https://github.com/...",
+      "twitter": "https://twitter.com/...",
+      "instagram": "https://instagram.com/..."
+    }
+  },
+
+  "summary": "Two to four sentences. The 'objective' paragraph from the CV — who you are, what you specialise in, what kind of value you bring.",
+
+  "skills": [
+    { "name": "C# / .NET 8", "category": "backend" },
+    { "name": "Python", "category": "language" },
+    { "name": "SQL Server", "category": "database" },
+    { "name": "Azure DevOps", "category": "devops" }
+  ],
+
+  "experience": [
+    {
+      "role": "Job Title",
+      "org": "Company Name",
+      "location": "City, Country",
+      "startDate": "2026-02",
+      "endDate": null,
+      "current": true,
+      "bullets": [
+        "Responsibility or achievement, one per bullet.",
+        "Another bullet — kept short and specific."
+      ]
+    }
+  ],
+
+  "projects": [
+    {
+      "name": "Project Name",
+      "badge": "short category label, e.g. 'Data Analysis'",
+      "description": "One or two sentences on what it does and why it matters.",
+      "stack": ["Java", "Firebase", "Android Studio"],
+      "link": null
+    }
+  ],
+
+  "education": [
+    {
+      "degree": "Qualification Name (NQF level)",
+      "school": "Institution Name",
+      "startDate": "2023-02",
+      "endDate": "2025-12",
+      "notes": "Optional extra line — average, distinctions, focus area."
+    }
+  ],
+
+  "certifications": [
+    {
+      "name": "Certification Name",
+      "issuer": "Issuing body, if relevant",
+      "year": "2024"
+    }
+  ],
+
+  "highlights": [
+    {
+      "title": "Headline of the achievement",
+      "description": "Short story / context.",
+      "stats": [
+        { "value": "R30,000", "label": "Prize won" },
+        { "value": "R100,000", "label": "Funding secured" }
+      ]
+    }
+  ]
+}
