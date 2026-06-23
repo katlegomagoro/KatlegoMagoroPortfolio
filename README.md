@@ -62,3 +62,4 @@ These two are intentionally decoupled — a failing GitHub Action does **not** b
 ## Secrets & Environment Variables
 
 None exist yet — MVP and Iteration 1 are a static frontend with no backend. This section becomes relevant starting Iteration 2 (AI chat). See `ARCHITECTURE.md` Section 8.4 for where things will live once they exist.
+
