@@ -3,6 +3,14 @@ name: Build & Deploy
 # Deploy-on-merge model. build runs on every PR open/sync/reopen so failures
 # are visible before merge. deploy only runs once a PR has actually merged.
 #
+# Test suite (Vitest) was added ahead of ARCHITECTURE.md Section 8.6's
+# original schedule (which only required tests starting Iteration 2) —
+# Katlego asked for tests now rather than waiting, on the reasoning that a
+# CI pipeline running zero tests isn't actually following best practice,
+# it's deferring it. App.test.tsx currently covers the one real contract
+# that exists at MVP stage: App.tsx must render whatever is in profile.json,
+# not hardcoded values.
+#
 # Approval gating (solo-dev setup): GitHub blocks self-approval on PR reviews,
 # so branch protection "require approval" would lock the repo's only
 # developer out of merging anything. Instead, the manual checkpoint lives on
@@ -52,10 +60,8 @@ jobs:
       - name: Format check
         run: npm run format:check
 
-      # No automated test suite yet — there's no real logic to test at MVP
-      # stage (App.tsx is a placeholder render of profile.json). Per
-      # ARCHITECTURE.md Section 8.6, automated tests become a requirement
-      # starting Iteration 2; a `test` step gets added here when that lands.
+      - name: Test
+        run: npm run test
 
       - name: Upload build artifact
         if: ${{ github.event.action == 'closed' && github.event.pull_request.merged == true }}
