@@ -1,16 +1,34 @@
-name: CI
+name: Build & Deploy
 
-# Build + lint check only — this workflow never deploys.
-# Cloudflare Pages' own Git integration watches these same branches
-# and performs the actual deploy per ARCHITECTURE.md Section 4.4.
+# Deploy-on-merge model. build runs on every PR open/sync/reopen so failures
+# are visible before merge. deploy only runs once a PR has actually merged.
+#
+# Test suite (Vitest) was added ahead of ARCHITECTURE.md Section 8.6's
+# original schedule (which only required tests starting Iteration 2) —
+# Katlego asked for tests now rather than waiting, on the reasoning that a
+# CI pipeline running zero tests isn't actually following best practice,
+# it's deferring it. App.test.tsx currently covers the one real contract
+# that exists at MVP stage: App.tsx must render whatever is in profile.json,
+# not hardcoded values.
+#
+# Approval gating (solo-dev setup): GitHub blocks self-approval on PR reviews,
+# so branch protection "require approval" would lock the repo's only
+# developer out of merging anything. Instead, the manual checkpoint lives on
+# the DEPLOY step via GitHub Environments, which does support self-approval —
+# develop deploys immediately (it's meant to be safe to break), uat and
+# main pause and wait for a manual click in the Actions tab before deploying.
 on:
-  push:
-    branches: [develop, uat, main]
   pull_request:
     branches: [develop, uat, main]
+    types: [opened, synchronize, reopened, closed]
+
+env:
+  node-version: "20"
 
 jobs:
   build:
+    name: "Build"
+    if: ${{ github.event.action == 'opened' || github.event.action == 'synchronize' || github.event.action == 'reopened' || (github.event.action == 'closed' && github.event.pull_request.merged == true) }}
     runs-on: ubuntu-latest
 
     defaults:
@@ -20,11 +38,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha || github.sha }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: ${{ env.node-version }}
           cache: "npm"
           cache-dependency-path: app/package-lock.json
 
@@ -39,3 +59,126 @@ jobs:
 
       - name: Format check
         run: npm run format:check
+
+      - name: Test
+        run: npm run test
+
+      - name: Upload build artifact
+        if: ${{ github.event.action == 'closed' && github.event.pull_request.merged == true }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: app/dist
+
+  # Dev deploys immediately on merge — no approval gate, matches
+  # ARCHITECTURE.md's description of develop as "safe to break."
+  deploy-dev:
+    name: "Deploy - Dev"
+    if: ${{ github.event.action == 'closed' && github.event.pull_request.merged == true && github.base_ref == 'develop' }}
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+
+      - name: Deploy to Cloudflare Pages (Dev)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=katlegomagoroportfolio --branch=develop
+
+      - name: Verify Dev is reachable
+        run: |
+          URL="https://develop.katlegomagoroportfolio.pages.dev"
+          for i in 1 2 3 4 5; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+            if [ "$STATUS" = "200" ]; then
+              echo "Dev healthy: $URL returned 200"
+              exit 0
+            fi
+            echo "Attempt $i: got $STATUS, retrying in 10s..."
+            sleep 10
+          done
+          echo "Dev did not return 200 after 5 attempts"
+          exit 1
+
+  # UAT pauses here for manual approval — requires the 'uat' GitHub
+  # Environment to exist with you as a required reviewer (see README).
+  deploy-uat:
+    name: "Deploy - UAT"
+    if: ${{ github.event.action == 'closed' && github.event.pull_request.merged == true && github.base_ref == 'uat' }}
+    needs: build
+    environment: uat
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+
+      - name: Deploy to Cloudflare Pages (UAT)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=katlegomagoroportfolio --branch=uat
+
+      - name: Verify UAT is reachable
+        run: |
+          URL="https://uat.katlegomagoroportfolio.pages.dev"
+          for i in 1 2 3 4 5; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+            if [ "$STATUS" = "200" ]; then
+              echo "UAT healthy: $URL returned 200"
+              exit 0
+            fi
+            echo "Attempt $i: got $STATUS, retrying in 10s..."
+            sleep 10
+          done
+          echo "UAT did not return 200 after 5 attempts"
+          exit 1
+
+  # Production pauses here for manual approval — requires the 'production'
+  # GitHub Environment to exist with you as a required reviewer.
+  deploy-production:
+    name: "Deploy - Production"
+    if: ${{ github.event.action == 'closed' && github.event.pull_request.merged == true && github.base_ref == 'main' }}
+    needs: build
+    environment: production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+
+      - name: Deploy to Cloudflare Pages (Production)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=katlegomagoroportfolio --branch=main
+
+      - name: Verify Production is reachable
+        run: |
+          URL="https://katlegomagoroportfolio.pages.dev"
+          for i in 1 2 3 4 5; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+            if [ "$STATUS" = "200" ]; then
+              echo "Production healthy: $URL returned 200"
+              exit 0
+            fi
+            echo "Attempt $i: got $STATUS, retrying in 10s..."
+            sleep 10
+          done
+          echo "Production did not return 200 after 5 attempts"
+          exit 1
