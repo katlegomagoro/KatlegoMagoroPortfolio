@@ -2,12 +2,20 @@ import { loadProfile } from "./data/loadProfile";
 import type { Profile } from "./data/profile.types";
 import {
   BrowserRouter,
+  Link,
   Navigate,
   NavLink,
   Route,
   Routes,
   useLocation,
 } from "react-router-dom";
+
+const NAV_ITEMS = [
+  { to: "/", label: "Home" },
+  { to: "/experience", label: "Experience" },
+  { to: "/projects", label: "Projects" },
+  { to: "/contact", label: "Contact" },
+];
 
 function formatDate(value: string): string {
   const [year, month] = value.split("-").map(Number);
@@ -46,16 +54,46 @@ function SocialLinks({ profile }: { profile: Profile }) {
   );
 }
 
-function FeaturedInSection({ profile }: { profile: Profile }) {
-  if (!profile.featuredIn || profile.featuredIn.length === 0) {
+function SectionHeading({
+  title,
+  kicker,
+  blurb,
+}: {
+  title: string;
+  kicker: string;
+  blurb?: string;
+}) {
+  return (
+    <div className="section-heading">
+      <p className="section-kicker">{kicker}</p>
+      <h2>{title}</h2>
+      {blurb && <p className="section-blurb">{blurb}</p>}
+    </div>
+  );
+}
+
+function FeaturedInSection({
+  profile,
+  limit,
+}: {
+  profile: Profile;
+  limit?: number;
+}) {
+  const featured = profile.featuredIn?.slice(0, limit);
+
+  if (!featured || featured.length === 0) {
     return null;
   }
 
   return (
     <section className="section card">
-      <h2>Featured In</h2>
+      <SectionHeading
+        kicker="Media"
+        title="Featured In"
+        blurb="Selected interviews, press stories, and ecosystem recognition across South African tech."
+      />
       <div className="project-grid">
-        {profile.featuredIn.map((feature, i) => (
+        {featured.map((feature, i) => (
           <article className="project" key={i}>
             <h3>{feature.title}</h3>
             <p className="period">
@@ -74,6 +112,9 @@ function FeaturedInSection({ profile }: { profile: Profile }) {
 
 function HomePage({ profile }: { profile: Profile }) {
   const topSkills = profile.skills.slice(0, 12);
+  const totalYears = new Date().getFullYear() - 2021;
+  const activeProjects = profile.projects.length;
+  const featuredCount = profile.featuredIn?.length ?? 0;
   const initials = profile.basics.name
     .split(" ")
     .filter(Boolean)
@@ -114,11 +155,40 @@ function HomePage({ profile }: { profile: Profile }) {
         </div>
 
         <p className="summary">{profile.summary}</p>
+
+        <div className="metric-strip">
+          <article className="metric-card">
+            <strong>{Math.max(totalYears, 1)}+</strong>
+            <span>Years building software</span>
+          </article>
+          <article className="metric-card">
+            <strong>{activeProjects}</strong>
+            <span>Portfolio projects</span>
+          </article>
+          <article className="metric-card">
+            <strong>{featuredCount}</strong>
+            <span>Media features</span>
+          </article>
+        </div>
+
+        <div className="hero-actions">
+          <Link className="action-link action-primary" to="/projects">
+            View Projects
+          </Link>
+          <Link className="action-link" to="/contact">
+            Contact Me
+          </Link>
+        </div>
+
         <SocialLinks profile={profile} />
       </header>
 
       <section className="section card">
-        <h2>Core Skills</h2>
+        <SectionHeading
+          kicker="Capabilities"
+          title="Core Skills"
+          blurb="Production-focused engineering across backend systems, test automation, and cloud delivery."
+        />
         <div className="chips">
           {topSkills.map((skill, i) => (
             <span className="chip" key={i}>
@@ -130,7 +200,11 @@ function HomePage({ profile }: { profile: Profile }) {
 
       {profile.highlights && profile.highlights.length > 0 && (
         <section className="section card">
-          <h2>Recognition</h2>
+          <SectionHeading
+            kicker="Highlights"
+            title="Recognition"
+            blurb="Key wins and milestones that shaped the current engineering trajectory."
+          />
           <div className="project-grid">
             {profile.highlights.map((highlight, i) => (
               <article className="project" key={i}>
@@ -152,7 +226,7 @@ function HomePage({ profile }: { profile: Profile }) {
         </section>
       )}
 
-      <FeaturedInSection profile={profile} />
+      <FeaturedInSection profile={profile} limit={3} />
     </>
   );
 }
@@ -161,7 +235,11 @@ function ExperiencePage({ profile }: { profile: Profile }) {
   return (
     <>
       <section className="section card">
-        <h2>Experience</h2>
+        <SectionHeading
+          kicker="Career"
+          title="Experience"
+          blurb="A progression from quality engineering into full-stack delivery and technical ownership."
+        />
         <div className="timeline">
           {profile.experience.map((job, i) => (
             <article className="timeline-item" key={i}>
@@ -185,7 +263,7 @@ function ExperiencePage({ profile }: { profile: Profile }) {
 
       <section className="section split">
         <article className="card">
-          <h2>Education</h2>
+          <SectionHeading kicker="Academic" title="Education" />
           {profile.education.map((edu, i) => (
             <article className="mini-card" key={i}>
               <h3>{edu.degree}</h3>
@@ -199,7 +277,7 @@ function ExperiencePage({ profile }: { profile: Profile }) {
         </article>
 
         <article className="card">
-          <h2>Certifications</h2>
+          <SectionHeading kicker="Credentials" title="Certifications" />
           {profile.certifications.map((cert, i) => (
             <article className="mini-card" key={i}>
               <h3>{cert.name}</h3>
@@ -217,7 +295,11 @@ function ProjectsPage({ profile }: { profile: Profile }) {
   return (
     <>
       <section className="section card">
-        <h2>Projects</h2>
+        <SectionHeading
+          kicker="Builds"
+          title="Projects"
+          blurb="Applied projects across data, product engineering, and hackathon execution."
+        />
         <div className="project-grid">
           {profile.projects.map((project, i) => (
             <article className="project" key={i}>
@@ -249,7 +331,11 @@ function ProjectsPage({ profile }: { profile: Profile }) {
 function ContactPage({ profile }: { profile: Profile }) {
   return (
     <section className="section card contact-card">
-      <h2>Contact</h2>
+      <SectionHeading
+        kicker="Connect"
+        title="Contact"
+        blurb="If you are building impactful systems, I would love to collaborate."
+      />
       <p className="contact-lead">
         I am open to software engineering, data engineering, and quality engineering
         opportunities. Reach out and let us build impactful products.
@@ -266,6 +352,11 @@ function ContactPage({ profile }: { profile: Profile }) {
         <article className="mini-card">
           <h3>Location</h3>
           <p>{profile.basics.location}</p>
+        </article>
+
+        <article className="mini-card">
+          <h3>Response Time</h3>
+          <p>Usually within 24 hours for professional opportunities.</p>
         </article>
       </div>
 
@@ -286,31 +377,16 @@ function SiteLayout() {
       <header className="topbar card">
         <p className="brand">KM</p>
         <nav className="site-nav" aria-label="Main navigation">
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/experience"
-            className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}
-          >
-            Experience
-          </NavLink>
-          <NavLink
-            to="/projects"
-            className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}
-          >
-            Projects
-          </NavLink>
-          <NavLink
-            to="/contact"
-            className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}
-          >
-            Contact
-          </NavLink>
+          {NAV_ITEMS.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.to === "/"}
+              className={({ isActive }) => `nav-link ${isActive ? "is-active" : ""}`}
+            >
+              {item.label}
+            </NavLink>
+          ))}
         </nav>
       </header>
 

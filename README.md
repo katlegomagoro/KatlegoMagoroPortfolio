@@ -5,10 +5,20 @@ Personal portfolio site. Full architecture and engineering standards are documen
 ## Stack
 
 - React + Vite + TypeScript (`app/`)
+- Multi-page SPA routing via React Router (`/`, `/experience`, `/projects`, `/contact`)
 - Content sourced from `app/src/data/profile.json` (single source of truth)
 - Hosted on Cloudflare Pages (free tier), three environments via branch mapping
 - Tested with Vitest + React Testing Library
 - CI/CD: GitHub Actions builds, lints, format-checks, and tests every PR — then deploys via Wrangler on merge (see "Build & Deploy Pipeline" below). Cloudflare's own auto-deploy is disabled; Actions is the only deploy path.
+
+## App UX Structure
+
+- `Home`: hero, key metrics, skills, recognition, featured media preview
+- `Experience`: timeline + education + certifications
+- `Projects`: project cards + full featured media list
+- `Contact`: direct email/location/social call-to-action
+
+Profile image support is optional. To enable it, set `basics.headshot` in `app/src/data/profile.json` to a file path under `app/public`, for example `/katlego-headshot.jpg`.
 
 ## Local Setup
 
@@ -33,7 +43,7 @@ If `npm run build` fails on a clean clone, that's a bug — see NFR-4 in `ARCHIT
 | `uat`     | UAT         | `*.pages.dev` (auto-generated) |
 | `main`    | Production  | Custom domain                 |
 
-Flow of a change: `feature/xxx` → PR into `develop` → PR into `uat` → PR into `main`. No direct pushes to `uat` or `main`.
+Flow of a change: `feature/ShortPascalCase` → PR into `develop` → PR into `uat` → PR into `main`. No direct pushes to `uat` or `main`.
 
 ## Connecting Cloudflare Pages (one-time setup, done by Katlego)
 
