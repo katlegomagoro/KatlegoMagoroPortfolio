@@ -4,10 +4,10 @@
 // CV parser is what eventually writes new values into this shape.
 
 export interface ProfileLinks {
-  linkedin?: string;
-  github?: string;
-  twitter?: string;
-  instagram?: string;
+  linkedin?: string | null;
+  github?: string | null;
+  twitter?: string | null;
+  instagram?: string | null;
 }
 
 export interface ProfileBasics {
@@ -15,7 +15,8 @@ export interface ProfileBasics {
   title: string;
   location: string;
   email: string;
-  phone?: string;
+  headshot?: string | null;
+  phone?: string | null;
   links?: ProfileLinks;
 }
 
@@ -67,6 +68,14 @@ export interface ProfileHighlight {
   stats?: ProfileHighlightStat[];
 }
 
+export interface ProfileFeaturedIn {
+  title: string;
+  publisher: string;
+  date: string;
+  summary: string;
+  url: string;
+}
+
 export interface Profile {
   basics: ProfileBasics;
   summary: string;
@@ -76,4 +85,5 @@ export interface Profile {
   education: ProfileEducation[];
   certifications: ProfileCertification[];
   highlights?: ProfileHighlight[];
+  featuredIn?: ProfileFeaturedIn[];
 }
