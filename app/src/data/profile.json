@@ -1,80 +1,237 @@
 {
-  "_comment": "STRUCTURE FOR REVIEW ONLY — placeholder values throughout. Nothing here is final. Once approved, real CV content gets filled in.",
-
   "basics": {
-    "name": "Full Name",
-    "title": "Job Title / Headline",
-    "location": "City, Country",
-    "email": "you@example.com",
-    "phone": "+27 00 000 0000",
+    "name": "Katlego Magoro",
+    "title": "Full Stack Developer — Software and Data Engineering",
+    "location": "Pretoria, South Africa",
+    "email": "katlegomagoro98@gmail.com",
+    "headshot": null,
+    "phone": null,
     "links": {
-      "linkedin": "https://linkedin.com/in/...",
-      "github": "https://github.com/...",
-      "twitter": "https://twitter.com/...",
-      "instagram": "https://instagram.com/..."
+      "linkedin": "https://www.linkedin.com/in/katlego-magoro-288b08236/",
+      "github": "https://github.com/katlegomagoro",
+      "twitter": "https://x.com/katlegomagoro8?s=11",
+      "instagram": "https://www.instagram.com/katlegomagoro/"
     }
   },
 
-  "summary": "Two to four sentences. The 'objective' paragraph from the CV — who you are, what you specialise in, what kind of value you bring.",
+  "summary": "Raised by his grandparents in Moloto, Gauteng, Katlego originally planned to study law at the University of Pretoria to fight for justice in underserved communities like his own. A registration delay redirected him into ICT instead — a turn that became a genuine passion. He went on to complete a Diploma in Application Development at Walter Sisulu University, graduate in the first-ever African cohort of the Samsung Innovation Campus, and build a career as a proactive Software Developer and Data Engineer with a strong foundation in Java, C#, Python, .NET, and C++. His work spans full-stack development, data analysis, and software quality engineering, with an emphasis on test automation and CI/CD pipelines using Selenium, Robot Framework, and Azure DevOps.",
 
   "skills": [
-    { "name": "C# / .NET 8", "category": "backend" },
-    { "name": "Python", "category": "language" },
+    { "name": "C#", "category": "language" },
+    { "name": ".NET / ASP.NET Core", "category": "backend" },
+    { "name": "Blazor", "category": "frontend" },
+    { "name": "Entity Framework Core", "category": "backend" },
     { "name": "SQL Server", "category": "database" },
-    { "name": "Azure DevOps", "category": "devops" }
+    { "name": "Python", "category": "language" },
+    { "name": "Java", "category": "language" },
+    { "name": "C++", "category": "language" },
+    { "name": "Android Development", "category": "mobile" },
+    { "name": "Azure DevOps", "category": "devops" },
+    { "name": "Git", "category": "devops" },
+    { "name": "Selenium", "category": "testing" },
+    { "name": "Robot Framework", "category": "testing" },
+    { "name": "Rest Assured", "category": "testing" },
+    { "name": "JMeter", "category": "testing" },
+    { "name": "Agile Methodologies", "category": "practice" }
   ],
 
   "experience": [
     {
-      "role": "Job Title",
-      "org": "Company Name",
-      "location": "City, Country",
+      "role": "Embedded Systems Software Developer",
+      "org": "Expleo Group",
+      "location": "Johannesburg, South Africa (Remote)",
       "startDate": "2026-02",
       "endDate": null,
       "current": true,
       "bullets": [
-        "Responsibility or achievement, one per bullet.",
-        "Another bullet — kept short and specific."
+        "Full-stack development using C#, .NET, ASP.NET Core, EF Core, SQL Server, and Blazor.",
+        "Design and implement scalable backend services, APIs, and responsive front-end components.",
+        "Own architecture, database modelling, and performance optimisation using LINQ and EF Core.",
+        "Apply SOLID principles and clean architecture to deliver maintainable, production-ready solutions.",
+        "Contribute to CI/CD pipelines using Azure DevOps and Git, ensuring reliable deployments.",
+        "Conduct code reviews, mentor junior developers, and support technical standards across the team."
+      ]
+    },
+    {
+      "role": "Associate Developer — Software and Data Engineering",
+      "org": "Expleo Group",
+      "location": "Johannesburg, South Africa (Hybrid)",
+      "startDate": "2024-04",
+      "endDate": "2026-02",
+      "current": false,
+      "bullets": [
+        "Collaborated with cross-functional teams to design, develop, and implement software solutions aligned with business objectives.",
+        "Engaged in full-stack development across front-end and back-end technologies to deliver enterprise solutions.",
+        "Drove the full software development lifecycle, from requirement analysis and design through testing, deployment, and maintenance.",
+        "Participated in code reviews, debugging, and troubleshooting to maintain code quality."
+      ]
+    },
+    {
+      "role": "Software Test Engineer Intern",
+      "org": "Expleo Group",
+      "location": "Johannesburg, South Africa (Hybrid)",
+      "startDate": "2023-04",
+      "endDate": "2024-03",
+      "current": false,
+      "bullets": [
+        "Contributed to quality assurance and software testing initiatives, collaborating with cross-functional teams to deliver high-quality software products.",
+        "Executed and automated test cases using Java Selenium, Rest Assured, and Robot Framework, improving testing efficiency and accuracy.",
+        "Participated in Agile development methodologies across iterative sprints.",
+        "Identified and addressed software defects to improve product reliability."
+      ]
+    },
+    {
+      "role": "Hackathon Participant",
+      "org": "Rivonia Circle Hackathon (in partnership with Geekulcha)",
+      "location": "Tshimologong Precinct, Johannesburg, South Africa",
+      "startDate": "2022-08",
+      "endDate": "2022-08",
+      "current": false,
+      "bullets": [
+        "Participated in the Rivonia Circle Hackathon, hosted in partnership with Geekulcha at the Tshimologong Precinct.",
+        "Hacked on the 'South Africa 2.0' challenge — designing tech platforms and tools to drive digital community activism, policy engagement, and democratic participation."
+      ]
+    },
+    {
+      "role": "Software Developer Trainee — Samsung Innovation Campus",
+      "org": "Samsung Innovation Campus, in partnership with Walter Sisulu University",
+      "location": "South Africa",
+      "startDate": "2022-08",
+      "endDate": "2022-12",
+      "current": false,
+      "bullets": [
+        "Participated in the Samsung Innovation Campus Cohort Beneficiary program with Walter Sisulu University.",
+        "Contributed to problem-solving in AI, IoT, and big data.",
+        "Completed a project analysing the effects of load-shedding on the South African economy using Python, Pandas, NumPy, and web crawling — resulting in a 15% increase in efficiency.",
+        "Delivered the closing speech on behalf of fellow students at the program's awards ceremony, attended by Samsung South Africa's President and CEO and the Minister of Communications.",
+        "Returned in 2024 as the main student representative of the first cohort to address the second cohort's AI graduation ceremony."
+      ]
+    },
+    {
+      "role": "Research Project Coordinator",
+      "org": "East London Industrial Development Zone (ELIDZ) Science and Technology Park Incubation Program",
+      "location": "East London, South Africa",
+      "startDate": "2021-11",
+      "endDate": "2022-10",
+      "current": false,
+      "bullets": [
+        "Provided technical support and conducted data analysis for an app that won the ELIDZ ICT Hackathon Challenge.",
+        "Contributed to the app's efficient functioning and ongoing improvement through research-based, data-driven decision making.",
+        "Identified by the program's leadership as one of the most successful projects in the incubation cohort."
+      ]
+    },
+    {
+      "role": "Social Secretary, IT Department Committee",
+      "org": "Walter Sisulu University",
+      "location": "Queenstown, South Africa",
+      "startDate": "2020-03",
+      "endDate": "2021-03",
+      "current": false,
+      "bullets": [
+        "Involved in the formation and development of the IT Society at Walter Sisulu University's Komani Campus.",
+        "Assisted the President and board of directors in planning and executing social events and facilitating committee meetings."
       ]
     }
   ],
 
   "projects": [
     {
-      "name": "Project Name",
-      "badge": "short category label, e.g. 'Data Analysis'",
-      "description": "One or two sentences on what it does and why it matters.",
-      "stack": ["Java", "Firebase", "Android Studio"],
+      "name": "ELIDZ ICT Hackathon — Team Code Brigaders",
+      "badge": "Hackathon Win",
+      "description": "Won the East London IDZ Science and Technology Park ICT Hackathon Challenge (Nov 2021) as part of Team Code Brigaders, presenting a health application designed to improve the rate at which services are rendered in public clinics in rural areas. The win earned R30,000 and a 12-month incubation place with R100,000 in funding.",
+      "stack": ["Data Analysis", "Technical Support", "Health-Tech"],
+      "link": "https://www.elidz.co.za/elidz-stp-hosts-a-successful-ict-hackathon-challenge/"
+    },
+    {
+      "name": "PAICTA AgriSec Hackathon",
+      "badge": "Project & Team Lead",
+      "description": "Led a team at the PAICTA Virtual Eastern Cape Youth Digital AgriSec Hackathon (Sep 2021), coordinating roadblocks, tracking progress, and presenting the team's project to the judging panel. Team placed 2nd out of 20 teams.",
+      "stack": ["Project Coordination", "Presentation"],
+      "link": null
+    },
+    {
+      "name": "Load-Shedding Economic Impact Analysis",
+      "badge": "Data Analysis",
+      "description": "Analysed the economic effects of load-shedding on the South African economy as part of the Samsung Innovation Campus program, using Python, Pandas, NumPy, and web-crawled data.",
+      "stack": ["Python", "Pandas", "NumPy", "Web Crawling"],
       "link": null
     }
   ],
 
   "education": [
     {
-      "degree": "Qualification Name (NQF level)",
-      "school": "Institution Name",
-      "startDate": "2023-02",
+      "degree": "Advanced Diploma in Information Resource Management (Information Technology)",
+      "school": "University of South Africa (UNISA)",
+      "startDate": "2023-01",
       "endDate": "2025-12",
-      "notes": "Optional extra line — average, distinctions, focus area."
+      "notes": "Applied advanced information systems and data management concepts in real-world organisational contexts; strengthened software development through structured analysis, system modelling, and solution design."
+    },
+    {
+      "degree": "Diploma in Information and Communication Technology, specialising in Application Development",
+      "school": "Walter Sisulu University",
+      "startDate": "2020-02",
+      "endDate": "2022-12",
+      "notes": "73% average, with distinctions in 7 of 12 modules."
     }
   ],
 
   "certifications": [
     {
-      "name": "Certification Name",
-      "issuer": "Issuing body, if relevant",
+      "name": "ISTQB Foundation Level (CTFL)",
+      "issuer": "Southern African Software Testing Qualifications Board (SASTQB)",
       "year": "2024"
+    },
+    {
+      "name": "Job Oriented — Practical Software QA Testing",
+      "issuer": "Udemy",
+      "year": "2023"
     }
   ],
 
   "highlights": [
     {
-      "title": "Headline of the achievement",
-      "description": "Short story / context.",
+      "title": "ELIDZ Hackathon Win",
+      "description": "Won the East London IDZ Science and Technology Park ICT Hackathon Challenge with Team Code Brigaders (Nov 2021), securing prize money and a year-long incubation place.",
       "stats": [
         { "value": "R30,000", "label": "Prize won" },
-        { "value": "R100,000", "label": "Funding secured" }
+        { "value": "R100,000", "label": "Incubation funding" }
       ]
+    },
+    {
+      "title": "Samsung Innovation Campus — International Youth Day Feature",
+      "description": "Featured globally by Samsung as part of their International Youth Day Celebration, recognising the Samsung Innovation Campus program's role in developing emerging tech talent.",
+      "stats": []
+    }
+  ],
+
+  "featuredIn": [
+    {
+      "title": "ELIDZ STP Hosts a Successful ICT Hackathon Challenge",
+      "publisher": "East London IDZ SOC Ltd",
+      "date": "2022-04-13",
+      "summary": "Official ELIDZ press statement naming Team Code Brigaders (including Katlego) as winners of the November 2021 ICT Hackathon Challenge for a health application aimed at improving service delivery in rural public clinics. Note: the release spells the surname 'Mogoro'.",
+      "url": "https://www.elidz.co.za/elidz-stp-hosts-a-successful-ict-hackathon-challenge/"
+    },
+    {
+      "title": "Samsung programme helps fuel the dreams of a young technologist",
+      "publisher": "Samsung Newsroom South Africa",
+      "date": "2023-06-30",
+      "summary": "A personal feature profiling Katlego's journey from a planned law degree into ICT, his Diploma at Walter Sisulu University, and his graduation from the first Samsung Innovation Campus cohort in South Africa.",
+      "url": "https://news.samsung.com/za/samsung-programme-helps-fuel-the-dreams-of-a-young-technologist"
+    },
+    {
+      "title": "Final-year IT students graduate in AI education thanks to WSU-Samsung partnership",
+      "publisher": "Walter Sisulu University",
+      "date": "2024-02-27",
+      "summary": "Coverage of the 2024 Samsung Innovation Campus AI graduation ceremony, where Katlego served as the main student representative for the first cohort, addressing new graduates alongside Samsung executives and Minister Stella Ndabeni-Abrahams.",
+      "url": "https://www.wsu.ac.za/en/component/content/article/final-year-it-students-graduate-in-ai-education-thanks-to-wsu-samsung-partnership?catid=18&Itemid=101"
+    },
+    {
+      "title": "Expleo SA Digital Skills Factory celebrates success in partnership with YES programme",
+      "publisher": "ITWeb",
+      "date": "2024-10-07",
+      "summary": "National tech media coverage profiling Katlego as a success story of Expleo's Digital Skills Factory initiative, run in partnership with the Youth Employment Service (YES) programme, on his transition into a qualified software developer.",
+      "url": "https://www.itweb.co.za/article/expleo-sa-digital-skills-factory-celebrates-success-in-partnership-with-yes-programme/6GxRKMYQrBQMb3Wj"
     }
   ]
 }
