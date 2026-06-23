@@ -217,6 +217,69 @@ h3 {
 	max-width: 90ch;
 }
 
+.metric-strip {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+	gap: 0.65rem;
+}
+
+.metric-card {
+	border: 1px solid rgba(255, 255, 255, 0.11);
+	background: rgba(255, 255, 255, 0.02);
+	border-radius: 0.9rem;
+	padding: 0.7rem;
+}
+
+.metric-card strong {
+	display: block;
+	font-family: "Syne", "Segoe UI", sans-serif;
+	font-size: 1.45rem;
+	color: var(--accent);
+}
+
+.metric-card span {
+	font-size: 0.84rem;
+	color: var(--muted);
+}
+
+.hero-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+}
+
+.action-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.52rem 0.95rem;
+	border-radius: 999px;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 0.9rem;
+	border: 1px solid var(--line);
+	color: var(--text);
+	transition: transform 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.action-link:hover {
+	transform: translateY(-2px);
+	border-color: var(--accent);
+	color: var(--accent);
+}
+
+.action-primary {
+	background: linear-gradient(120deg, rgba(53, 245, 184, 0.95), rgba(58, 240, 255, 0.82));
+	color: #042f23;
+	border-color: transparent;
+}
+
+.action-primary:hover {
+	color: #042f23;
+	border-color: transparent;
+	filter: brightness(1.05);
+}
+
 .social-links {
 	display: flex;
 	flex-wrap: wrap;
@@ -240,6 +303,26 @@ h3 {
 
 .section {
 	animation: rise 700ms ease both;
+}
+
+.section-heading {
+	margin-bottom: 1rem;
+}
+
+.section-kicker {
+	margin: 0 0 0.45rem;
+	font-size: 0.74rem;
+	font-weight: 800;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--accent);
+}
+
+.section-blurb {
+	margin: 0.55rem 0 0;
+	color: var(--muted);
+	max-width: 68ch;
+	line-height: 1.6;
 }
 
 .contact-card {
@@ -446,5 +529,9 @@ h3 {
 
 	.summary {
 		line-height: 1.6;
+	}
+
+	.metric-strip {
+		grid-template-columns: 1fr;
 	}
 }
