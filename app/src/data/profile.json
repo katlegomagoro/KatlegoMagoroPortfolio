@@ -15,7 +15,7 @@
     },
     "image": "Profile_katlego.png"
   },
-  "objective": "Hi I am Katlego Magoro, a Full Stack Developer. I build software that is reliable, practical, and grounded in real business needs, from backend services, testing, data engineering, and APIs to performant interfaces and quality-focused delivery pipelines.",
+  "objective": "Hi 👋, I'm Katlego Magoro. Before anything else, I'm a problem solver, that's why I became a developer 💻. Code is just how I choose to solve them. I genuinely believe tech is one of the most powerful tools we have, powerful enough that I plan to be a better version of Elon Musk and stop world hunger one day 😂. No pressure on me though. I build meaningful systems, the kind that take on real-life problems and actually fix them. Hop in and get to know more about me ❤️...",
   "summary": "I am a proactive Software Developer and Data Engineer with a strong foundation in Java, C#, Python, .NET, and C++. My expertise spans software and application development, web development, and data analysis, with a focus on technologies such as Blazor, JMeter, and Rest Assured. My experience also includes software quality engineering, emphasizing test automation and Agile methodologies using Selenium, Robot Framework, and CI/CD pipelines.\n\nCurrently at Expleo Group, I work across full-stack engineering, collaborating with cross-functional teams to deliver scalable, high-performance solutions. My role covers the full software development lifecycle from design and architecture to deployment and production support, while continuously aligning with evolving engineering trends and delivery practices.\n\nPreviously, I served as a Software Quality Engineer Intern and contributed to major testing initiatives, including POS and API-driven systems. I also worked on data-focused projects such as analysing the economic impacts of load shedding in South Africa. With a Diploma in ICT Application Development from Walter Sisulu University and a strong commitment to continuous learning, I aim to deliver software that is practical, reliable, and impactful.",
   "skills": [
     {
@@ -423,7 +423,12 @@
         "Conducted data analysis and technical support to improve operational efficiency across community-facing projects.",
         "Contributed research-backed insights to incubation projects focused on practical regional impact."
       ],
-      "skills": ["Data Analysis", "Technical Support", "Research", "Project Coordination"],
+      "skills": [
+        "Data Analysis",
+        "Technical Support",
+        "Research",
+        "Project Coordination"
+      ],
       "keyWin": "Part of the winning team that secured both immediate prize funding and incubation investment for continued development."
     },
     {

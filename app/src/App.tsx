@@ -193,13 +193,16 @@ function IntroOverlay({
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (prefersReducedMotion) {
-      setTyped(message);
-      setDone(true);
-      return;
+      const frame = window.requestAnimationFrame(() => {
+        setTyped(message);
+        setDone(true);
+      });
+
+      return () => {
+        window.cancelAnimationFrame(frame);
+      };
     }
 
-    setTyped("");
-    setDone(false);
     let index = 0;
     const timer = window.setInterval(() => {
       index += 1;
@@ -286,6 +289,46 @@ function IntroOverlay({
     }, []);
   const displayLines = wrappedLines.length > 0 ? wrappedLines : [""];
 
+  const decorateEmojiText = (text: string) => {
+    return Array.from(text).map((char, index) => {
+      if (char === "😂" || char === "❤️" || char === "💻") {
+        return (
+          <span className="intro-emoji" key={`emoji-${index}`}>
+            {char}
+          </span>
+        );
+      }
+
+      return <span key={`char-${index}`}>{char}</span>;
+    });
+  };
+
+  const renderLineContent = (line: string, isLastLine: boolean) => {
+    const shouldAnimateEllipsis = done && isLastLine && line.endsWith("...");
+    const baseLine = shouldAnimateEllipsis ? line.slice(0, -3) : line;
+    const segments = baseLine.split("👋");
+
+    return (
+      <span className="token-string">
+        {segments.map((segment, index) => (
+          <span key={`seg-${index}`}>
+            {decorateEmojiText(segment)}
+            {index < segments.length - 1 && (
+              <span className="intro-wave intro-emoji">👋</span>
+            )}
+          </span>
+        ))}
+        {shouldAnimateEllipsis && (
+          <span className="intro-ellipsis" aria-hidden="true">
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+          </span>
+        )}
+      </span>
+    );
+  };
+
   return (
     <div
       ref={overlayRef}
@@ -321,8 +364,11 @@ function IntroOverlay({
                   {displayLines.map((line, index) => {
                     const isLastLine = index === displayLines.length - 1;
                     return (
-                      <p className="intro-code-line intro-code-message" key={`msg-${index}`}>
-                        <span className="token-string">{line}</span>
+                      <p
+                        className="intro-code-line intro-code-message"
+                        key={`msg-${index}`}
+                      >
+                        {renderLineContent(line, isLastLine)}
                         {isLastLine && !done && (
                           <span className="type-caret" aria-hidden="true" />
                         )}
@@ -587,7 +633,10 @@ function HomePage({ profile }: { profile: Profile }) {
               </thead>
               <tbody>
                 {skillRows.map((group) => (
-                  <tr key={group} className="border-b border-primary/10 align-top last:border-b-0">
+                  <tr
+                    key={group}
+                    className="border-b border-primary/10 align-top last:border-b-0"
+                  >
                     <td className="w-56 px-4 py-4 font-headline text-sm font-semibold text-on-surface">
                       {SKILL_GROUP_LABELS[group]}
                     </td>
@@ -607,7 +656,6 @@ function HomePage({ profile }: { profile: Profile }) {
           </div>
         </Reveal>
       </section>
-
     </>
   );
 }
@@ -706,7 +754,10 @@ function ExperiencePage({ profile }: { profile: Profile }) {
                       </p>
                       <div className="mt-2 flex flex-wrap gap-2">
                         {job.skills.map((skill, j) => (
-                          <span className="data-chip" key={`${job.org}-skill-${j}`}>
+                          <span
+                            className="data-chip"
+                            key={`${job.org}-skill-${j}`}
+                          >
                             {skill}
                           </span>
                         ))}
@@ -719,7 +770,9 @@ function ExperiencePage({ profile }: { profile: Profile }) {
                       <p className="font-mono text-xs uppercase tracking-[0.05em] text-primary">
                         Key Win
                       </p>
-                      <p className="mt-2 text-sm text-on-surface">{job.keyWin}</p>
+                      <p className="mt-2 text-sm text-on-surface">
+                        {job.keyWin}
+                      </p>
                     </div>
                   )}
                 </article>
@@ -971,7 +1024,10 @@ function SiteLayout({
         </nav>
       </header>
 
-      <div key={location.pathname} className={`route-stage ${introDone ? "" : "is-hidden"}`}>
+      <div
+        key={location.pathname}
+        className={`route-stage ${introDone ? "" : "is-hidden"}`}
+      >
         <Routes>
           <Route path="/" element={<HomePage profile={profile} />} />
           <Route
