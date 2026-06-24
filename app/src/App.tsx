@@ -462,35 +462,14 @@ function HomePage({ profile }: { profile: Profile }) {
         onMouseLeave={handleHeroLeave}
         className="relative mx-auto max-w-5xl px-4 pt-20 pb-16 md:px-16"
       >
-        <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[1fr_auto]">
-          <div>
-            <p className="font-mono text-sm tracking-[0.05em] uppercase text-primary">
-              Portfolio 2026
-            </p>
-            <h1 className="mt-3 font-headline text-4xl font-bold text-on-surface md:text-6xl">
-              {profile.basics.name}
-            </h1>
-            <p className="mt-2 font-headline text-xl text-primary md:text-2xl">
-              {profile.basics.title}
-            </p>
-
-            <div className="mt-4 flex flex-wrap gap-4 text-sm text-on-surface-variant">
-              <span>{profile.basics.location}</span>
-              {profile.basics.phone && <span>{profile.basics.phone}</span>}
-              <span>
-                <a
-                  href={`mailto:${profile.basics.email}`}
-                  className="underline-offset-4 hover:underline"
-                >
-                  {profile.basics.email}
-                </a>
-              </span>
-            </div>
-          </div>
+        <div className="flex flex-col items-start gap-6">
+          <p className="font-mono text-sm tracking-[0.05em] uppercase text-primary">
+            Portfolio 2026
+          </p>
 
           <div
             aria-label="Profile photo"
-            className="h-32 w-32 overflow-hidden rounded-full border border-primary/20 md:h-40 md:w-40"
+            className="h-40 w-40 overflow-hidden rounded-full border border-primary/20 md:h-56 md:w-56"
           >
             {profile.basics.headshot ? (
               <img
@@ -506,6 +485,64 @@ function HomePage({ profile }: { profile: Profile }) {
                 {initials}
               </div>
             )}
+          </div>
+
+          <div>
+            <h1 className="mt-3 font-headline text-4xl font-bold text-on-surface md:text-6xl">
+              {profile.basics.name}
+            </h1>
+            <p className="mt-2 font-headline text-xl text-primary md:text-2xl">
+              {profile.basics.title}
+            </p>
+
+            <div className="mt-4 flex flex-wrap gap-4 text-sm text-on-surface-variant">
+              <span className="inline-flex items-center gap-2">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 22s7-5.9 7-12a7 7 0 10-14 0c0 6.1 7 12 7 12z"
+                  />
+                  <circle cx="12" cy="10" r="2.6" />
+                </svg>
+                {profile.basics.location}
+              </span>
+              {profile.basics.phone && <span>{profile.basics.phone}</span>}
+              <span className="inline-flex items-center gap-2">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 7h16v10H4z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 8l8 6 8-6"
+                  />
+                </svg>
+                <a
+                  href={`mailto:${profile.basics.email}`}
+                  className="underline-offset-4 hover:underline"
+                >
+                  {profile.basics.email}
+                </a>
+              </span>
+            </div>
           </div>
         </div>
 
