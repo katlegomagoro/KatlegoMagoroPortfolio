@@ -318,7 +318,10 @@ function IntroOverlay({
                   {displayLines.map((line, index) => {
                     const isLastLine = index === displayLines.length - 1;
                     return (
-                      <p className="intro-code-line intro-code-message" key={`msg-${index}`}>
+                      <p
+                        className="intro-code-line intro-code-message"
+                        key={`msg-${index}`}
+                      >
                         <span className="token-string">{line}</span>
                         {isLastLine && !done && (
                           <span className="type-caret" aria-hidden="true" />
@@ -621,7 +624,10 @@ function HomePage({ profile }: { profile: Profile }) {
               </thead>
               <tbody>
                 {skillRows.map((group) => (
-                  <tr key={group} className="border-b border-primary/10 align-top last:border-b-0">
+                  <tr
+                    key={group}
+                    className="border-b border-primary/10 align-top last:border-b-0"
+                  >
                     <td className="w-56 px-4 py-4 font-headline text-sm font-semibold text-on-surface">
                       {SKILL_GROUP_LABELS[group]}
                     </td>
@@ -641,7 +647,6 @@ function HomePage({ profile }: { profile: Profile }) {
           </div>
         </Reveal>
       </section>
-
     </>
   );
 }
@@ -740,7 +745,10 @@ function ExperiencePage({ profile }: { profile: Profile }) {
                       </p>
                       <div className="mt-2 flex flex-wrap gap-2">
                         {job.skills.map((skill, j) => (
-                          <span className="data-chip" key={`${job.org}-skill-${j}`}>
+                          <span
+                            className="data-chip"
+                            key={`${job.org}-skill-${j}`}
+                          >
                             {skill}
                           </span>
                         ))}
@@ -753,7 +761,9 @@ function ExperiencePage({ profile }: { profile: Profile }) {
                       <p className="font-mono text-xs uppercase tracking-[0.05em] text-primary">
                         Key Win
                       </p>
-                      <p className="mt-2 text-sm text-on-surface">{job.keyWin}</p>
+                      <p className="mt-2 text-sm text-on-surface">
+                        {job.keyWin}
+                      </p>
                     </div>
                   )}
                 </article>
@@ -1005,7 +1015,10 @@ function SiteLayout({
         </nav>
       </header>
 
-      <div key={location.pathname} className={`route-stage ${introDone ? "" : "is-hidden"}`}>
+      <div
+        key={location.pathname}
+        className={`route-stage ${introDone ? "" : "is-hidden"}`}
+      >
         <Routes>
           <Route path="/" element={<HomePage profile={profile} />} />
           <Route
