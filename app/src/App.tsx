@@ -608,7 +608,7 @@ function HomePage({ profile }: { profile: Profile }) {
           <SectionHeading
             kicker="Capabilities"
             title="Core Skills"
-            blurb="Complete capability matrix across platform engineering, APIs, testing, delivery pipelines, and data work."
+            blurb="Complete capability matrix across platform engineering, APIs, testing, delivery pipelines, and data engineering work."
           />
           <div className="overflow-x-auto rounded-xl border border-primary/20 bg-surface/20">
             <table className="w-full min-w-[760px] border-collapse text-left">
