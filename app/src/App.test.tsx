@@ -3,8 +3,9 @@ import { describe, expect, it } from "vitest";
 import App from "./App";
 import profile from "./data/profile.json";
 
-async function dismissIntroOverlay() {
-  const continueButton = await screen.findByRole("button", {
+function renderAppWithIntroDismissed() {
+  render(<App />);
+  const continueButton = screen.getByRole("button", {
     name: /press enter to continue/i,
   });
   fireEvent.click(continueButton);
@@ -16,23 +17,20 @@ async function dismissIntroOverlay() {
 // so a silent break here (e.g. someone hardcodes a name in JSX later) is
 // exactly the kind of regression worth catching automatically.
 describe("App", () => {
-  it("renders the name from profile.json", async () => {
-    render(<App />);
-    await dismissIntroOverlay();
+  it("renders the name from profile.json", () => {
+    renderAppWithIntroDismissed();
     expect(
       screen.getByRole("heading", { name: profile.basics.name })
     ).toBeInTheDocument();
   });
 
-  it("renders the title from profile.json", async () => {
-    render(<App />);
-    await dismissIntroOverlay();
+  it("renders the title from profile.json", () => {
+    renderAppWithIntroDismissed();
     expect(screen.getByText(profile.basics.title)).toBeInTheDocument();
   });
 
-  it("renders the summary from profile.json", async () => {
-    render(<App />);
-    await dismissIntroOverlay();
+  it("renders the summary paragraphs from profile.json", () => {
+    renderAppWithIntroDismissed();
 
     const summaryParagraphs = profile.summary
       .split(/\n\n+/)
