@@ -19,6 +19,7 @@ export interface ProfileBasics {
   headshot?: string | null;
   phone?: string | null;
   links?: ProfileLinks;
+  image?: string | null;
 }
 
 export interface ProfileSkill {
@@ -34,6 +35,9 @@ export interface ProfileExperience {
   endDate: string | null;
   current?: boolean;
   bullets: string[];
+  skills?: string[];
+  keyWin?: string;
+  image?: string | null;
 }
 
 export interface ProfileProject {
@@ -42,6 +46,7 @@ export interface ProfileProject {
   description: string;
   stack: string[];
   link?: string | null;
+  image?: string | null;
 }
 
 export interface ProfileEducation {
@@ -75,6 +80,7 @@ export interface ProfileFeaturedIn {
   date: string;
   summary: string;
   url: string;
+  image?: string | null;
 }
 
 export interface Profile {

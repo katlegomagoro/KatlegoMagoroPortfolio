@@ -10,7 +10,6 @@ Personal portfolio site. Full architecture and engineering standards are documen
 - Hosted on Cloudflare Pages (free tier), three environments via branch mapping
 - Tested with Vitest + React Testing Library
 - CI/CD: GitHub Actions builds, lints, format-checks, and tests every PR — then deploys via Wrangler on merge (see "Build & Deploy Pipeline" below). Cloudflare's own auto-deploy is disabled; Actions is the only deploy path.
-
 ## App UX Structure
 
 - `Home`: hero, objective, key metrics, skills, recognition, featured media preview
@@ -28,7 +27,7 @@ The profile dataset currently captures:
 - Technical project portfolio (mobile, web, data, and automation)
 - Certifications and media features
 
-Profile image support is optional. To enable it, set `basics.headshot` in `app/src/data/profile.json` to a file path under `app/public`, for example `/katlego-headshot.jpg`.
+Profile image support: `basics.headshot` in `app/src/data/profile.json` points to a file path under `app/public` (e.g. `/Kat_WSU.jpeg`) and is used directly as an `<img>` src on the homepage hero. Separately, `basics.image` and per-experience/per-project `image` fields point to plain filenames resolved via `app/src/assetMap.ts` against files in `app/src/assets/` — these two mechanisms exist because the project currently has two independent UI implementations being merged; this should be consolidated into one image-handling approach in Iteration 1.
 
 ## Local Setup
 
