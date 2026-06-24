@@ -14,6 +14,7 @@ export interface ProfileBasics {
   name: string;
   title: string;
   location: string;
+  address?: string | null;
   email: string;
   headshot?: string | null;
   phone?: string | null;
@@ -78,6 +79,7 @@ export interface ProfileFeaturedIn {
 
 export interface Profile {
   basics: ProfileBasics;
+  objective?: string;
   summary: string;
   skills: ProfileSkill[];
   experience: ProfileExperience[];
