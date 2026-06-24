@@ -183,23 +183,20 @@ function IntroOverlay({
   message: string;
   onComplete: () => void;
 }) {
+  const prefersReducedMotion =
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const overlayRef = useRef<HTMLDivElement | null>(null);
-  const [typed, setTyped] = useState("");
-  const [done, setDone] = useState(false);
+  const [typed, setTyped] = useState(() =>
+    prefersReducedMotion ? message : ""
+  );
+  const [done, setDone] = useState(() => prefersReducedMotion);
 
   useEffect(() => {
-    const prefersReducedMotion =
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (prefersReducedMotion) {
-      setTyped(message);
-      setDone(true);
+    if (prefersReducedMotion || done) {
       return;
     }
 
-    setTyped("");
-    setDone(false);
     let index = 0;
     const timer = window.setInterval(() => {
       index += 1;
@@ -214,7 +211,7 @@ function IntroOverlay({
     return () => {
       window.clearInterval(timer);
     };
-  }, [message]);
+  }, [done, message, prefersReducedMotion]);
 
   useEffect(() => {
     if (overlayRef.current) {
@@ -1014,41 +1011,21 @@ function App() {
 
     return "system";
   });
-  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() => {
-    return getSystemTheme();
-  });
+  const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(() =>
+    getSystemTheme()
+  );
+  const resolvedTheme: ResolvedTheme =
+    themeMode === "system" ? systemTheme : themeMode;
 
   useEffect(() => {
-    const applyThemeToDom = (theme: ResolvedTheme) => {
-      document.documentElement.setAttribute("data-theme", theme);
-      document.body.setAttribute("data-theme", theme);
-      document.body.classList.remove("theme-light", "theme-dark");
-      document.body.classList.add(theme === "light" ? "theme-light" : "theme-dark");
-    };
-
     if (typeof window.matchMedia !== "function") {
-      const fallbackTheme: ResolvedTheme =
-        themeMode === "system" ? "light" : themeMode;
-      setResolvedTheme(fallbackTheme);
-      applyThemeToDom(fallbackTheme);
       return;
     }
 
     const media = window.matchMedia("(prefers-color-scheme: dark)");
 
-    const updateResolvedTheme = () => {
-      const systemTheme: ResolvedTheme = media.matches ? "dark" : "light";
-      const next = themeMode === "system" ? systemTheme : themeMode;
-      setResolvedTheme(next);
-      applyThemeToDom(next);
-    };
-
-    updateResolvedTheme();
-
-    const handleChange = () => {
-      if (themeMode === "system") {
-        updateResolvedTheme();
-      }
+    const handleChange = (event: MediaQueryListEvent) => {
+      setSystemTheme(event.matches ? "dark" : "light");
     };
 
     media.addEventListener("change", handleChange);
@@ -1056,7 +1033,16 @@ function App() {
     return () => {
       media.removeEventListener("change", handleChange);
     };
-  }, [themeMode]);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", resolvedTheme);
+    document.body.setAttribute("data-theme", resolvedTheme);
+    document.body.classList.remove("theme-light", "theme-dark");
+    document.body.classList.add(
+      resolvedTheme === "light" ? "theme-light" : "theme-dark"
+    );
+  }, [resolvedTheme]);
 
   useEffect(() => {
     localStorage.setItem(THEME_STORAGE_KEY, themeMode);
