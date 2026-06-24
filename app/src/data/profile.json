@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Katlego Magoro",
-    "title": "Full Stack Developer — Software and Data Engineering",
+    "title": "Full Stack Developer — Software, Test Quality Assurance and Data Engineering",
     "location": "Pretoria, South Africa",
     "address": "Pretoria / Johannesburg, South Africa",
     "email": "katlegomagoro98@gmail.com",
@@ -423,7 +423,12 @@
         "Conducted data analysis and technical support to improve operational efficiency across community-facing projects.",
         "Contributed research-backed insights to incubation projects focused on practical regional impact."
       ],
-      "skills": ["Data Analysis", "Technical Support", "Research", "Project Coordination"],
+      "skills": [
+        "Data Analysis",
+        "Technical Support",
+        "Research",
+        "Project Coordination"
+      ],
       "keyWin": "Part of the winning team that secured both immediate prize funding and incubation investment for continued development."
     },
     {

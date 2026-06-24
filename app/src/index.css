@@ -88,6 +88,59 @@
 }
 
 @layer base {
+  :root[data-theme="light"],
+  html[data-theme="light"],
+  body[data-theme="light"],
+  body.theme-light {
+    --color-surface: #f3f8ff;
+    --color-surface-dim: #e4edf7;
+    --color-surface-bright: #ffffff;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-low: #edf3fb;
+    --color-surface-container: #e5edf8;
+    --color-surface-container-high: #d8e3f2;
+    --color-surface-container-highest: #ccd9ea;
+    --color-surface-variant: #d3dde9;
+    --color-on-surface: #122031;
+    --color-on-surface-variant: #3f4c5b;
+    --color-inverse-surface: #1d2a3a;
+    --color-inverse-on-surface: #ecf4ff;
+    --color-outline: #607284;
+    --color-outline-variant: #aebdcd;
+
+    --color-surface-tint: #007ea0;
+    --color-primary: #006f8c;
+    --color-on-primary: #ffffff;
+    --color-primary-container: #b8ecff;
+    --color-on-primary-container: #003547;
+    --color-inverse-primary: #7fdbf9;
+    --color-primary-fixed: #c7f1ff;
+    --color-primary-fixed-dim: #7fdbf9;
+    --color-on-primary-fixed: #001f2a;
+    --color-on-primary-fixed-variant: #00485f;
+
+    --color-secondary: #7a5c00;
+    --color-on-secondary: #ffffff;
+    --color-secondary-container: #ffe395;
+    --color-on-secondary-container: #2f2300;
+    --color-secondary-fixed: #ffe9b4;
+    --color-secondary-fixed-dim: #efc65a;
+    --color-on-secondary-fixed: #2b1f00;
+    --color-on-secondary-fixed-variant: #5b4300;
+
+    --color-tertiary: #4c5f7e;
+    --color-on-tertiary: #ffffff;
+    --color-tertiary-container: #dae5ff;
+    --color-on-tertiary-container: #21314c;
+    --color-tertiary-fixed: #dce5ff;
+    --color-tertiary-fixed-dim: #becde8;
+    --color-on-tertiary-fixed: #101d34;
+    --color-on-tertiary-fixed-variant: #3c4d69;
+
+    --color-background: #f3f8ff;
+    --color-on-background: #122031;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-on-background);
@@ -99,6 +152,17 @@
     );
     background-attachment: fixed;
     min-height: 100vh;
+  }
+
+  :root[data-theme="light"] body,
+  html[data-theme="light"] body,
+  body[data-theme="light"],
+  body.theme-light {
+    background-image: radial-gradient(
+      circle at 50% 0%,
+      var(--color-surface-container-high) 0%,
+      #e9f1fb 76%
+    );
   }
 
   h1,
@@ -182,11 +246,33 @@
     );
     border: 1px solid color-mix(in srgb, var(--color-primary) 50%, transparent);
     color: color-mix(in srgb, var(--color-primary-fixed) 90%, #ffffff);
-    box-shadow: 0 0 14px color-mix(in srgb, var(--color-primary) 18%, transparent);
+    box-shadow: 0 0 14px
+      color-mix(in srgb, var(--color-primary) 18%, transparent);
     border-radius: 9999px;
     padding: 4px 12px;
     display: inline-block;
     white-space: nowrap;
+  }
+
+  :root[data-theme="light"] .data-chip,
+  html[data-theme="light"] .data-chip,
+  body[data-theme="light"] .data-chip,
+  body.theme-light .data-chip {
+    background: linear-gradient(
+      120deg,
+      color-mix(in srgb, var(--color-primary-container) 70%, #ffffff),
+      color-mix(in srgb, var(--color-primary) 18%, #ffffff)
+    );
+    border-color: color-mix(in srgb, var(--color-primary) 52%, #3b6c80);
+    color: #11435a;
+    box-shadow: none;
+  }
+
+  :root[data-theme="light"] .terminal-timestamp,
+  html[data-theme="light"] .terminal-timestamp,
+  body[data-theme="light"] .terminal-timestamp,
+  body.theme-light .terminal-timestamp {
+    color: #0b607b;
   }
 
   .status-orb {
@@ -245,7 +331,11 @@
 
   .card {
     border: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
-    background: color-mix(in srgb, var(--color-surface-container) 70%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--color-surface-container) 70%,
+      transparent
+    );
     backdrop-filter: blur(10px);
     border-radius: 1rem;
     padding: 1rem;
@@ -260,7 +350,11 @@
     align-items: center;
     gap: 0.85rem;
     border: 1px solid color-mix(in srgb, var(--color-primary) 24%, transparent);
-    background: color-mix(in srgb, var(--color-surface-container) 72%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--color-surface-container) 72%,
+      transparent
+    );
     backdrop-filter: blur(18px);
   }
 
@@ -269,13 +363,18 @@
     height: 48px;
     border-radius: 9999px;
     border: 1px solid color-mix(in srgb, var(--color-primary) 45%, transparent);
-    background: color-mix(in srgb, var(--color-surface-container-high) 65%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--color-surface-container-high) 65%,
+      transparent
+    );
     overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    box-shadow: 0 0 18px color-mix(in srgb, var(--color-primary) 22%, transparent);
+    box-shadow: 0 0 18px
+      color-mix(in srgb, var(--color-primary) 22%, transparent);
   }
 
   .brand-avatar-image {
@@ -335,7 +434,11 @@
 
   .theme-select {
     border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
-    background: color-mix(in srgb, var(--color-surface-container-high) 70%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--color-surface-container-high) 70%,
+      transparent
+    );
     color: var(--color-on-surface);
     border-radius: 9999px;
     padding: 0.45rem 0.8rem;
@@ -347,7 +450,8 @@
   .typing-hero {
     margin-bottom: 1rem;
     max-width: 56rem;
-    border-left: 2px solid color-mix(in srgb, var(--color-primary) 50%, transparent);
+    border-left: 2px solid
+      color-mix(in srgb, var(--color-primary) 50%, transparent);
     padding-left: 0.75rem;
   }
 
@@ -381,7 +485,8 @@
   }
 
   .theme-select:focus-visible {
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 50%, transparent);
+    box-shadow: 0 0 0 2px
+      color-mix(in srgb, var(--color-primary) 50%, transparent);
   }
 
   .route-stage {
@@ -452,7 +557,6 @@
     background: #111111;
     border-bottom: 1px solid #2f2f2f;
   }
-
 
   .intro-dot {
     width: 10px;
@@ -576,7 +680,11 @@
   .contact-card {
     border: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
     border-radius: 1rem;
-    background: color-mix(in srgb, var(--color-surface-container) 65%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--color-surface-container) 65%,
+      transparent
+    );
     padding: 1.5rem;
   }
 
@@ -596,7 +704,11 @@
     border: 1px solid color-mix(in srgb, var(--color-primary) 15%, transparent);
     border-radius: 0.75rem;
     padding: 0.9rem;
-    background: color-mix(in srgb, var(--color-surface-container-high) 50%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--color-surface-container-high) 50%,
+      transparent
+    );
   }
 
   .mini-card h3 {

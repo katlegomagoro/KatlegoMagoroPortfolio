@@ -19,3 +19,26 @@ class MockIntersectionObserver implements IntersectionObserver {
 }
 
 vi.stubGlobal("IntersectionObserver", MockIntersectionObserver);
+
+// Deterministic media query behavior for tests:
+// - reduced motion: true (skip typing delays)
+// - color scheme dark: false (light-mode default)
+vi.stubGlobal(
+  "matchMedia",
+  vi.fn((query: string): MediaQueryList => {
+    const matches =
+      query.includes("prefers-reduced-motion") ||
+      (!query.includes("prefers-color-scheme") && false);
+
+    return {
+      matches,
+      media: query,
+      onchange: null,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    } as unknown as MediaQueryList;
+  })
+);

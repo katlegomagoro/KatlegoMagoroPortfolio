@@ -183,23 +183,20 @@ function IntroOverlay({
   message: string;
   onComplete: () => void;
 }) {
+  const prefersReducedMotion =
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const overlayRef = useRef<HTMLDivElement | null>(null);
-  const [typed, setTyped] = useState("");
-  const [done, setDone] = useState(false);
+  const [typed, setTyped] = useState(() =>
+    prefersReducedMotion ? message : ""
+  );
+  const [done, setDone] = useState(() => prefersReducedMotion);
 
   useEffect(() => {
-    const prefersReducedMotion =
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (prefersReducedMotion) {
-      setTyped(message);
-      setDone(true);
+    if (prefersReducedMotion || done) {
       return;
     }
 
-    setTyped("");
-    setDone(false);
     let index = 0;
     const timer = window.setInterval(() => {
       index += 1;
@@ -214,7 +211,7 @@ function IntroOverlay({
     return () => {
       window.clearInterval(timer);
     };
-  }, [message]);
+  }, [done, message, prefersReducedMotion]);
 
   useEffect(() => {
     if (overlayRef.current) {
@@ -321,7 +318,10 @@ function IntroOverlay({
                   {displayLines.map((line, index) => {
                     const isLastLine = index === displayLines.length - 1;
                     return (
-                      <p className="intro-code-line intro-code-message" key={`msg-${index}`}>
+                      <p
+                        className="intro-code-line intro-code-message"
+                        key={`msg-${index}`}
+                      >
                         <span className="token-string">{line}</span>
                         {isLastLine && !done && (
                           <span className="type-caret" aria-hidden="true" />
@@ -465,35 +465,14 @@ function HomePage({ profile }: { profile: Profile }) {
         onMouseLeave={handleHeroLeave}
         className="relative mx-auto max-w-5xl px-4 pt-20 pb-16 md:px-16"
       >
-        <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[1fr_auto]">
-          <div>
-            <p className="font-mono text-sm tracking-[0.05em] uppercase text-primary">
-              Portfolio 2026
-            </p>
-            <h1 className="mt-3 font-headline text-4xl font-bold text-on-surface md:text-6xl">
-              {profile.basics.name}
-            </h1>
-            <p className="mt-2 font-headline text-xl text-primary md:text-2xl">
-              {profile.basics.title}
-            </p>
-
-            <div className="mt-4 flex flex-wrap gap-4 text-sm text-on-surface-variant">
-              <span>{profile.basics.location}</span>
-              {profile.basics.phone && <span>{profile.basics.phone}</span>}
-              <span>
-                <a
-                  href={`mailto:${profile.basics.email}`}
-                  className="underline-offset-4 hover:underline"
-                >
-                  {profile.basics.email}
-                </a>
-              </span>
-            </div>
-          </div>
+        <div className="flex flex-col items-start gap-6">
+          <p className="font-mono text-sm tracking-[0.05em] uppercase text-primary">
+            Portfolio 2026
+          </p>
 
           <div
             aria-label="Profile photo"
-            className="h-32 w-32 overflow-hidden rounded-full border border-primary/20 md:h-40 md:w-40"
+            className="h-40 w-40 overflow-hidden rounded-full border border-primary/20 md:h-56 md:w-56"
           >
             {profile.basics.headshot ? (
               <img
@@ -509,6 +488,64 @@ function HomePage({ profile }: { profile: Profile }) {
                 {initials}
               </div>
             )}
+          </div>
+
+          <div>
+            <h1 className="mt-3 font-headline text-4xl font-bold text-on-surface md:text-6xl">
+              {profile.basics.name}
+            </h1>
+            <p className="mt-2 font-headline text-xl text-primary md:text-2xl">
+              {profile.basics.title}
+            </p>
+
+            <div className="mt-4 flex flex-wrap gap-4 text-sm text-on-surface-variant">
+              <span className="inline-flex items-center gap-2">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 22s7-5.9 7-12a7 7 0 10-14 0c0 6.1 7 12 7 12z"
+                  />
+                  <circle cx="12" cy="10" r="2.6" />
+                </svg>
+                {profile.basics.location}
+              </span>
+              {profile.basics.phone && <span>{profile.basics.phone}</span>}
+              <span className="inline-flex items-center gap-2">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 7h16v10H4z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 8l8 6 8-6"
+                  />
+                </svg>
+                <a
+                  href={`mailto:${profile.basics.email}`}
+                  className="underline-offset-4 hover:underline"
+                >
+                  {profile.basics.email}
+                </a>
+              </span>
+            </div>
           </div>
         </div>
 
@@ -571,7 +608,7 @@ function HomePage({ profile }: { profile: Profile }) {
           <SectionHeading
             kicker="Capabilities"
             title="Core Skills"
-            blurb="Complete capability matrix across platform engineering, APIs, testing, delivery pipelines, and data work."
+            blurb="Complete capability matrix across platform engineering, APIs, testing, delivery pipelines, and data engineering work."
           />
           <div className="overflow-x-auto rounded-xl border border-primary/20 bg-surface/20">
             <table className="w-full min-w-[760px] border-collapse text-left">
@@ -587,7 +624,10 @@ function HomePage({ profile }: { profile: Profile }) {
               </thead>
               <tbody>
                 {skillRows.map((group) => (
-                  <tr key={group} className="border-b border-primary/10 align-top last:border-b-0">
+                  <tr
+                    key={group}
+                    className="border-b border-primary/10 align-top last:border-b-0"
+                  >
                     <td className="w-56 px-4 py-4 font-headline text-sm font-semibold text-on-surface">
                       {SKILL_GROUP_LABELS[group]}
                     </td>
@@ -607,7 +647,6 @@ function HomePage({ profile }: { profile: Profile }) {
           </div>
         </Reveal>
       </section>
-
     </>
   );
 }
@@ -706,7 +745,10 @@ function ExperiencePage({ profile }: { profile: Profile }) {
                       </p>
                       <div className="mt-2 flex flex-wrap gap-2">
                         {job.skills.map((skill, j) => (
-                          <span className="data-chip" key={`${job.org}-skill-${j}`}>
+                          <span
+                            className="data-chip"
+                            key={`${job.org}-skill-${j}`}
+                          >
                             {skill}
                           </span>
                         ))}
@@ -719,7 +761,9 @@ function ExperiencePage({ profile }: { profile: Profile }) {
                       <p className="font-mono text-xs uppercase tracking-[0.05em] text-primary">
                         Key Win
                       </p>
-                      <p className="mt-2 text-sm text-on-surface">{job.keyWin}</p>
+                      <p className="mt-2 text-sm text-on-surface">
+                        {job.keyWin}
+                      </p>
                     </div>
                   )}
                 </article>
@@ -971,7 +1015,10 @@ function SiteLayout({
         </nav>
       </header>
 
-      <div key={location.pathname} className={`route-stage ${introDone ? "" : "is-hidden"}`}>
+      <div
+        key={location.pathname}
+        className={`route-stage ${introDone ? "" : "is-hidden"}`}
+      >
         <Routes>
           <Route path="/" element={<HomePage profile={profile} />} />
           <Route
@@ -1014,34 +1061,21 @@ function App() {
 
     return "system";
   });
-  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() => {
-    return getSystemTheme();
-  });
+  const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(() =>
+    getSystemTheme()
+  );
+  const resolvedTheme: ResolvedTheme =
+    themeMode === "system" ? systemTheme : themeMode;
 
   useEffect(() => {
     if (typeof window.matchMedia !== "function") {
-      document.documentElement.setAttribute(
-        "data-theme",
-        themeMode === "system" ? "light" : themeMode
-      );
       return;
     }
 
     const media = window.matchMedia("(prefers-color-scheme: dark)");
 
-    const updateResolvedTheme = () => {
-      const systemTheme: ResolvedTheme = media.matches ? "dark" : "light";
-      const next = themeMode === "system" ? systemTheme : themeMode;
-      setResolvedTheme(next);
-      document.documentElement.setAttribute("data-theme", next);
-    };
-
-    updateResolvedTheme();
-
-    const handleChange = () => {
-      if (themeMode === "system") {
-        updateResolvedTheme();
-      }
+    const handleChange = (event: MediaQueryListEvent) => {
+      setSystemTheme(event.matches ? "dark" : "light");
     };
 
     media.addEventListener("change", handleChange);
@@ -1049,7 +1083,16 @@ function App() {
     return () => {
       media.removeEventListener("change", handleChange);
     };
-  }, [themeMode]);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", resolvedTheme);
+    document.body.setAttribute("data-theme", resolvedTheme);
+    document.body.classList.remove("theme-light", "theme-dark");
+    document.body.classList.add(
+      resolvedTheme === "light" ? "theme-light" : "theme-dark"
+    );
+  }, [resolvedTheme]);
 
   useEffect(() => {
     localStorage.setItem(THEME_STORAGE_KEY, themeMode);
