@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from "react";
+import type { MouseEvent as ReactMouseEvent } from "react";
 import { loadProfile } from "./data/loadProfile";
 import type { Profile } from "./data/profile.types";
 import {
@@ -16,6 +18,21 @@ const NAV_ITEMS = [
   { to: "/projects", label: "Projects" },
   { to: "/contact", label: "Contact" },
 ];
+
+const THEME_STORAGE_KEY = "portfolio-theme-mode";
+
+type ThemeMode = "system" | "light" | "dark";
+type ResolvedTheme = "light" | "dark";
+
+function getSystemTheme(): ResolvedTheme {
+  if (typeof window.matchMedia !== "function") {
+    return "light";
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
 
 function formatDate(value: string): string {
   const [year, month] = value.split("-").map(Number);
@@ -111,7 +128,9 @@ function FeaturedInSection({
 }
 
 function HomePage({ profile }: { profile: Profile }) {
+  const heroRef = useRef<HTMLElement | null>(null);
   const topSkills = profile.skills.slice(0, 12);
+  const tickerSkills = [...topSkills, ...topSkills];
   const totalYears = new Date().getFullYear() - 2021;
   const activeProjects = profile.projects.length;
   const featuredCount = profile.featuredIn?.length ?? 0;
@@ -122,9 +141,35 @@ function HomePage({ profile }: { profile: Profile }) {
     .map((part) => part[0]?.toUpperCase() ?? "")
     .join("");
 
+  const handleHeroMove = (event: ReactMouseEvent<HTMLElement>) => {
+    if (!heroRef.current) {
+      return;
+    }
+
+    const rect = heroRef.current.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    heroRef.current.style.setProperty("--mx", `${x}px`);
+    heroRef.current.style.setProperty("--my", `${y}px`);
+  };
+
+  const handleHeroLeave = () => {
+    if (!heroRef.current) {
+      return;
+    }
+
+    heroRef.current.style.setProperty("--mx", "50%");
+    heroRef.current.style.setProperty("--my", "50%");
+  };
+
   return (
     <>
-      <header className="hero card">
+      <header
+        ref={heroRef}
+        className="hero card interactive-hero"
+        onMouseMove={handleHeroMove}
+        onMouseLeave={handleHeroLeave}
+      >
         <div className="hero-grid">
           <div>
             <p className="eyebrow">Portfolio 2026</p>
@@ -133,6 +178,7 @@ function HomePage({ profile }: { profile: Profile }) {
 
             <div className="meta-row">
               <span>{profile.basics.location}</span>
+              {profile.basics.phone && <span>{profile.basics.phone}</span>}
               <span>
                 <a href={`mailto:${profile.basics.email}`}>{profile.basics.email}</a>
               </span>
@@ -155,6 +201,10 @@ function HomePage({ profile }: { profile: Profile }) {
         </div>
 
         <p className="summary">{profile.summary}</p>
+
+        {profile.objective && (
+          <p className="summary summary-secondary">{profile.objective}</p>
+        )}
 
         <div className="metric-strip">
           <article className="metric-card">
@@ -182,6 +232,36 @@ function HomePage({ profile }: { profile: Profile }) {
 
         <SocialLinks profile={profile} />
       </header>
+
+      <section className="section card motion-showcase">
+        <SectionHeading
+          kicker="Live"
+          title="Engineering In Motion"
+          blurb="A moving snapshot of the stack and delivery focus currently driving implementation work."
+        />
+
+        <div className="status-row">
+          <span className="status-dot" aria-hidden="true" />
+          <p>Available for impactful full-stack .NET and platform engineering opportunities.</p>
+        </div>
+
+        <div className="ticker" aria-label="Technology ticker">
+          <div className="ticker-track">
+            {tickerSkills.map((skill, i) => (
+              <span className="ticker-pill" key={`${skill.name}-${i}`}>
+                {skill.name}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="orbit-zone" aria-hidden="true">
+          <div className="orbit-core" />
+          <span className="orbit-dot orbit-dot-a" />
+          <span className="orbit-dot orbit-dot-b" />
+          <span className="orbit-dot orbit-dot-c" />
+        </div>
+      </section>
 
       <section className="section card">
         <SectionHeading
@@ -354,6 +434,20 @@ function ContactPage({ profile }: { profile: Profile }) {
           <p>{profile.basics.location}</p>
         </article>
 
+        {profile.basics.phone && (
+          <article className="mini-card">
+            <h3>Phone</h3>
+            <p>{profile.basics.phone}</p>
+          </article>
+        )}
+
+        {profile.basics.address && (
+          <article className="mini-card">
+            <h3>Address</h3>
+            <p>{profile.basics.address}</p>
+          </article>
+        )}
+
         <article className="mini-card">
           <h3>Response Time</h3>
           <p>Usually within 24 hours for professional opportunities.</p>
@@ -365,7 +459,13 @@ function ContactPage({ profile }: { profile: Profile }) {
   );
 }
 
-function SiteLayout() {
+function SiteLayout({
+  themeMode,
+  onThemeModeChange,
+}: {
+  themeMode: ThemeMode;
+  onThemeModeChange: (mode: ThemeMode) => void;
+}) {
   const profile = loadProfile();
   const location = useLocation();
 
@@ -387,6 +487,19 @@ function SiteLayout() {
               {item.label}
             </NavLink>
           ))}
+          <div className="topbar-actions">
+            <select
+              id="theme-mode"
+              className="theme-select"
+              value={themeMode}
+              onChange={(event) => onThemeModeChange(event.target.value as ThemeMode)}
+              aria-label="Theme mode"
+            >
+              <option value="system">Theme: System</option>
+              <option value="dark">Theme: Dark</option>
+              <option value="light">Theme: Light</option>
+            </select>
+          </div>
         </nav>
       </header>
 
@@ -410,9 +523,60 @@ function SiteLayout() {
 }
 
 function App() {
+  const [themeMode, setThemeMode] = useState<ThemeMode>(() => {
+    const saved = localStorage.getItem(THEME_STORAGE_KEY);
+
+    if (saved === "light" || saved === "dark" || saved === "system") {
+      return saved;
+    }
+
+    return "system";
+  });
+  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() => {
+    return getSystemTheme();
+  });
+
+  useEffect(() => {
+    if (typeof window.matchMedia !== "function") {
+      document.documentElement.setAttribute("data-theme", themeMode === "system" ? "light" : themeMode);
+      return;
+    }
+
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const updateResolvedTheme = () => {
+      const systemTheme: ResolvedTheme = media.matches ? "dark" : "light";
+      const next = themeMode === "system" ? systemTheme : themeMode;
+      setResolvedTheme(next);
+      document.documentElement.setAttribute("data-theme", next);
+    };
+
+    updateResolvedTheme();
+
+    const handleChange = () => {
+      if (themeMode === "system") {
+        updateResolvedTheme();
+      }
+    };
+
+    media.addEventListener("change", handleChange);
+
+    return () => {
+      media.removeEventListener("change", handleChange);
+    };
+  }, [themeMode]);
+
+  useEffect(() => {
+    localStorage.setItem(THEME_STORAGE_KEY, themeMode);
+  }, [themeMode]);
+
+  useEffect(() => {
+    document.documentElement.style.colorScheme = resolvedTheme;
+  }, [resolvedTheme]);
+
   return (
     <BrowserRouter>
-      <SiteLayout />
+      <SiteLayout themeMode={themeMode} onThemeModeChange={setThemeMode} />
     </BrowserRouter>
   );
 }

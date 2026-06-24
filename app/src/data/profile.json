@@ -1,11 +1,12 @@
 {
   "basics": {
     "name": "Katlego Magoro",
-    "title": "Full Stack Developer — Software and Data Engineering",
-    "location": "Pretoria, South Africa",
+    "title": "Software Engineer (Full Stack .NET • Automation • Data Analysis)",
+    "location": "Arcadia, Pretoria, South Africa",
+    "address": "Unit 302, Elrica Complex, 370 Johan Street, Arcadia, Pretoria, 0083",
     "email": "katlegomagoro98@gmail.com",
     "headshot": null,
-    "phone": null,
+    "phone": "0662884270 / 0746803835",
     "links": {
       "linkedin": "https://www.linkedin.com/in/katlego-magoro-288b08236/",
       "github": "https://github.com/katlegomagoro",
@@ -14,24 +15,52 @@
     }
   },
 
-  "summary": "Raised by his grandparents in Moloto, Gauteng, Katlego originally planned to study law at the University of Pretoria to fight for justice in underserved communities like his own. A registration delay redirected him into ICT instead — a turn that became a genuine passion. He went on to complete a Diploma in Application Development at Walter Sisulu University, graduate in the first-ever African cohort of the Samsung Innovation Campus, and build a career as a proactive Software Developer and Data Engineer with a strong foundation in Java, C#, Python, .NET, and C++. His work spans full-stack development, data analysis, and software quality engineering, with an emphasis on test automation and CI/CD pipelines using Selenium, Robot Framework, and Azure DevOps.",
+  "objective": "Full Stack .NET Developer with 3+ years of experience delivering enterprise-grade systems across financial services, engineering, and internal business platforms. Specialized in C#, .NET, SQL Server, API integration, Blazor, test automation, and cloud DevOps pipelines. Strong hybrid capability across full-stack delivery, quality engineering, and data analysis.",
+
+  "summary": "Software Engineer with hands-on experience across full-stack .NET delivery, test automation, and data analysis. Builds clean, scalable, production-ready systems using C#, ASP.NET Core, EF Core, SQL Server, Blazor, and modern CI/CD practices. Strong collaborator in agile teams, with consistent ownership of architecture decisions, performance optimization, and high-quality releases.",
 
   "skills": [
     { "name": "C#", "category": "language" },
-    { "name": ".NET / ASP.NET Core", "category": "backend" },
-    { "name": "Blazor", "category": "frontend" },
-    { "name": "Entity Framework Core", "category": "backend" },
-    { "name": "SQL Server", "category": "database" },
-    { "name": "Python", "category": "language" },
     { "name": "Java", "category": "language" },
+    { "name": "Python", "category": "language" },
     { "name": "C++", "category": "language" },
+    { "name": "JavaScript", "category": "language" },
+    { "name": "HTML", "category": "frontend" },
+    { "name": "CSS", "category": "frontend" },
+    { "name": ".NET / ASP.NET Core", "category": "backend" },
+    { "name": ".NET 8", "category": "backend" },
+    { "name": "Web API", "category": "backend" },
+    { "name": "OData", "category": "backend" },
+    { "name": "Blazor", "category": "frontend" },
+    { "name": "MudBlazor", "category": "frontend" },
+    { "name": "Entity Framework", "category": "backend" },
+    { "name": "Entity Framework Core", "category": "backend" },
+    { "name": "LINQ", "category": "backend" },
+    { "name": "SQL Server", "category": "database" },
+    { "name": "MongoDB", "category": "database" },
+    { "name": "MySQL", "category": "database" },
+    { "name": "PostgreSQL", "category": "database" },
+    { "name": "Oracle", "category": "database" },
+    { "name": "SQLite", "category": "database" },
+    { "name": "Firebase", "category": "database" },
     { "name": "Android Development", "category": "mobile" },
     { "name": "Azure DevOps", "category": "devops" },
     { "name": "Git", "category": "devops" },
+    { "name": "GitHub", "category": "devops" },
+    { "name": "Jenkins", "category": "devops" },
+    { "name": "CI/CD", "category": "devops" },
     { "name": "Selenium", "category": "testing" },
     { "name": "Robot Framework", "category": "testing" },
     { "name": "Rest Assured", "category": "testing" },
     { "name": "JMeter", "category": "testing" },
+    { "name": "ISTQB", "category": "testing" },
+    { "name": "Pandas", "category": "data" },
+    { "name": "NumPy", "category": "data" },
+    { "name": "Web Crawling (BeautifulSoup)", "category": "data" },
+    { "name": "Data Analysis", "category": "data" },
+    { "name": "ELSA Workflows", "category": "integration" },
+    { "name": "Salesforce Integration", "category": "integration" },
+    { "name": "SOLID Principles", "category": "practice" },
     { "name": "Agile Methodologies", "category": "practice" }
   ],
 
@@ -44,12 +73,12 @@
       "endDate": null,
       "current": true,
       "bullets": [
-        "Full-stack development using C#, .NET, ASP.NET Core, EF Core, SQL Server, and Blazor.",
-        "Design and implement scalable backend services, APIs, and responsive front-end components.",
-        "Own architecture, database modelling, and performance optimisation using LINQ and EF Core.",
-        "Apply SOLID principles and clean architecture to deliver maintainable, production-ready solutions.",
-        "Contribute to CI/CD pipelines using Azure DevOps and Git, ensuring reliable deployments.",
-        "Conduct code reviews, mentor junior developers, and support technical standards across the team."
+        "Leading full-stack development using C#, .NET 8, ASP.NET Core, Web API, EF Core, SQL Server, and Blazor.",
+        "Design and implement scalable RESTful and OData APIs, backend services, and responsive front-end components.",
+        "Own architecture decisions, domain modeling, database design, and performance optimization using LINQ and EF Core.",
+        "Apply SOLID principles, clean architecture, dependency injection, and layered design patterns for production-ready delivery.",
+        "Contribute to CI/CD pipelines, build automation, and release management using Azure DevOps and Git.",
+        "Conduct code reviews, mentor junior developers, and troubleshoot complex issues across API, data, and UI layers."
       ]
     },
     {
@@ -60,51 +89,39 @@
       "endDate": "2026-02",
       "current": false,
       "bullets": [
-        "Collaborated with cross-functional teams to design, develop, and implement software solutions aligned with business objectives.",
-        "Engaged in full-stack development across front-end and back-end technologies to deliver enterprise solutions.",
-        "Drove the full software development lifecycle, from requirement analysis and design through testing, deployment, and maintenance.",
-        "Participated in code reviews, debugging, and troubleshooting to maintain code quality."
+        "Developed full-stack features using C#, .NET, Blazor Server, EF Core, and SQL Server for enterprise reporting and account management platforms.",
+        "Took end-to-end ownership of modules including API integrations, database structures, reusable components, and UI improvements.",
+        "Improved system performance by optimizing SQL queries and EF Core relationships, reducing load times across key reporting screens.",
+        "Integrated Salesforce through ELSA workflows to automate data synchronization and improve internal portal functionality.",
+        "Contributed to architecture discussions, implemented CI/CD pipelines in Azure DevOps, and supported junior developers through reviews."
       ]
     },
     {
-      "role": "Software Test Engineer Intern",
+      "role": "Software Quality Engineer Intern",
       "org": "Expleo Group",
       "location": "Johannesburg, South Africa (Hybrid)",
       "startDate": "2023-04",
       "endDate": "2024-03",
       "current": false,
       "bullets": [
-        "Contributed to quality assurance and software testing initiatives, collaborating with cross-functional teams to deliver high-quality software products.",
-        "Executed and automated test cases using Java Selenium, Rest Assured, and Robot Framework, improving testing efficiency and accuracy.",
-        "Participated in Agile development methodologies across iterative sprints.",
-        "Identified and addressed software defects to improve product reliability."
-      ]
-    },
-    {
-      "role": "Hackathon Participant",
-      "org": "Rivonia Circle Hackathon (in partnership with Geekulcha)",
-      "location": "Tshimologong Precinct, Johannesburg, South Africa",
-      "startDate": "2022-08",
-      "endDate": "2022-08",
-      "current": false,
-      "bullets": [
-        "Participated in the Rivonia Circle Hackathon, hosted in partnership with Geekulcha at the Tshimologong Precinct.",
-        "Hacked on the 'South Africa 2.0' challenge — designing tech platforms and tools to drive digital community activism, policy engagement, and democratic participation."
+        "Led end-to-end QA for financial and retail systems across four African countries, ensuring reliability and compliance.",
+        "Built automated regression suites with Selenium (Java), Robot Framework, and Rest Assured.",
+        "Integrated automation execution into CI/CD pipelines using Jenkins and Azure DevOps.",
+        "Performed API testing, compatibility testing, and functional validation in agile delivery cycles."
       ]
     },
     {
       "role": "Software Developer Trainee — Samsung Innovation Campus",
       "org": "Samsung Innovation Campus, in partnership with Walter Sisulu University",
-      "location": "South Africa",
+      "location": "East London, South Africa",
       "startDate": "2022-08",
       "endDate": "2022-12",
       "current": false,
       "bullets": [
-        "Participated in the Samsung Innovation Campus Cohort Beneficiary program with Walter Sisulu University.",
-        "Contributed to problem-solving in AI, IoT, and big data.",
-        "Completed a project analysing the effects of load-shedding on the South African economy using Python, Pandas, NumPy, and web crawling — resulting in a 15% increase in efficiency.",
-        "Delivered the closing speech on behalf of fellow students at the program's awards ceremony, attended by Samsung South Africa's President and CEO and the Minister of Communications.",
-        "Returned in 2024 as the main student representative of the first cohort to address the second cohort's AI graduation ceremony."
+        "Led a high-impact project analyzing the economic consequences of load shedding in South Africa using Python data tooling.",
+        "Built web and mobile applications using Java, Firebase, HTML, and CSS for reporting and presentations.",
+        "Designed data-driven application outputs for analytical storytelling and stakeholder communication.",
+        "Featured by Samsung South Africa and Samsung Global Youth Day for technology impact and youth innovation."
       ]
     },
     {
@@ -115,26 +132,56 @@
       "endDate": "2022-10",
       "current": false,
       "bullets": [
-        "Provided technical support and conducted data analysis for an app that won the ELIDZ ICT Hackathon Challenge.",
-        "Contributed to the app's efficient functioning and ongoing improvement through research-based, data-driven decision making.",
-        "Identified by the program's leadership as one of the most successful projects in the incubation cohort."
-      ]
-    },
-    {
-      "role": "Social Secretary, IT Department Committee",
-      "org": "Walter Sisulu University",
-      "location": "Queenstown, South Africa",
-      "startDate": "2020-03",
-      "endDate": "2021-03",
-      "current": false,
-      "bullets": [
-        "Involved in the formation and development of the IT Society at Walter Sisulu University's Komani Campus.",
-        "Assisted the President and board of directors in planning and executing social events and facilitating committee meetings."
+        "Played a key role in a team win at the ELIDZ hackathon, securing prize money and incubation funding.",
+        "Applied technical support and data analysis to improve project outcomes and operational efficiency.",
+        "Contributed to project documentation and incubation activities focused on community-impact use cases."
       ]
     }
   ],
 
   "projects": [
+    {
+      "name": "Loadshedding Impact Analysis",
+      "badge": "Data Engineering",
+      "description": "Analyzed load-shedding impact on the South African economy using Python pipelines and web-crawled datasets.",
+      "stack": ["Python", "Pandas", "NumPy", "Web Crawling", "Data Analysis"],
+      "link": null
+    },
+    {
+      "name": "EKASISKOOL Mobile App",
+      "badge": "Android",
+      "description": "Built Android mobile functionality for school-focused use cases with Java and Firebase-backed data flows.",
+      "stack": ["Java", "Firebase", "Android Development"],
+      "link": null
+    },
+    {
+      "name": "EKASI BNB Guesthouse App",
+      "badge": "Android",
+      "description": "Created Android app modules supporting guesthouse booking and service workflows.",
+      "stack": ["Java", "Firebase", "Android Development"],
+      "link": null
+    },
+    {
+      "name": "EKASI BNB Online Management System",
+      "badge": "Web Platform",
+      "description": "Developed online management system for hospitality operations and booking data management.",
+      "stack": ["HTML", "CSS", "PHP", "MySQL"],
+      "link": null
+    },
+    {
+      "name": "Website Functionality Testing",
+      "badge": "Quality Engineering",
+      "description": "Implemented automated functional test suites for web workflows and key user journeys.",
+      "stack": ["Java", "Selenium", "Test Automation"],
+      "link": null
+    },
+    {
+      "name": "Data Automation Testing",
+      "badge": "Automation",
+      "description": "Built Robot Framework and Python automation scripts for repeatable validation and regression checks.",
+      "stack": ["Robot Framework", "Python", "Test Automation"],
+      "link": null
+    },
     {
       "name": "ELIDZ ICT Hackathon — Team Code Brigaders",
       "badge": "Hackathon Win",
@@ -147,13 +194,6 @@
       "badge": "Project & Team Lead",
       "description": "Led a team at the PAICTA Virtual Eastern Cape Youth Digital AgriSec Hackathon (Sep 2021), coordinating roadblocks, tracking progress, and presenting the team's project to the judging panel. Team placed 2nd out of 20 teams.",
       "stack": ["Project Coordination", "Presentation"],
-      "link": null
-    },
-    {
-      "name": "Load-Shedding Economic Impact Analysis",
-      "badge": "Data Analysis",
-      "description": "Analysed the economic effects of load-shedding on the South African economy as part of the Samsung Innovation Campus program, using Python, Pandas, NumPy, and web-crawled data.",
-      "stack": ["Python", "Pandas", "NumPy", "Web Crawling"],
       "link": null
     }
   ],
@@ -182,8 +222,43 @@
       "year": "2024"
     },
     {
+      "name": "Robot Framework with Python — Selenium/API Automation Testing",
+      "issuer": "Udemy",
+      "year": "2023"
+    },
+    {
+      "name": "Cucumber BDD with Java — Masterclass Selenium Framework",
+      "issuer": "Udemy",
+      "year": "2023"
+    },
+    {
+      "name": "DevOps CI/CD for Beginners",
+      "issuer": "Udemy",
+      "year": "2023"
+    },
+    {
+      "name": "GitHub Ultimate: Master Git and GitHub",
+      "issuer": "Udemy",
+      "year": "2023"
+    },
+    {
+      "name": "JMeter from Scratch on Live Apps — Performance Testing",
+      "issuer": "Udemy",
+      "year": "2023"
+    },
+    {
       "name": "Job Oriented — Practical Software QA Testing",
       "issuer": "Udemy",
+      "year": "2023"
+    },
+    {
+      "name": "SQL for Data Analysis: Beginner MySQL Business Intelligence",
+      "issuer": "Udemy",
+      "year": "2023"
+    },
+    {
+      "name": "Samsung Innovation Campus — Basic Coding and Programming",
+      "issuer": "Samsung Innovation Campus",
       "year": "2023"
     }
   ],
@@ -201,6 +276,14 @@
       "title": "Samsung Innovation Campus — International Youth Day Feature",
       "description": "Featured globally by Samsung as part of their International Youth Day Celebration, recognising the Samsung Innovation Campus program's role in developing emerging tech talent.",
       "stats": []
+    },
+    {
+      "title": "Hybrid Engineering Profile",
+      "description": "Combines full-stack .NET development, automation testing, and data engineering to deliver robust business solutions.",
+      "stats": [
+        { "value": "3+", "label": "Years of industry delivery" },
+        { "value": "4", "label": "Countries supported in QA programs" }
+      ]
     }
   ],
 
@@ -218,6 +301,13 @@
       "date": "2023-06-30",
       "summary": "A personal feature profiling Katlego's journey from a planned law degree into ICT, his Diploma at Walter Sisulu University, and his graduation from the first Samsung Innovation Campus cohort in South Africa.",
       "url": "https://news.samsung.com/za/samsung-programme-helps-fuel-the-dreams-of-a-young-technologist"
+    },
+    {
+      "title": "International Youth Day 2023 — Samsung empowers innovators of tomorrow",
+      "publisher": "Samsung Global Newsroom",
+      "date": "2023-08-12",
+      "summary": "Global Samsung story featuring youth innovators, including Katlego's profile and development journey.",
+      "url": "https://news.samsung.com/global/international-youth-day-2023-how-samsung-empowers-the-innovators-of-tomorrow"
     },
     {
       "title": "Final-year IT students graduate in AI education thanks to WSU-Samsung partnership",

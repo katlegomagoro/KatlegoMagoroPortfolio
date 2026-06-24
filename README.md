@@ -13,10 +13,20 @@ Personal portfolio site. Full architecture and engineering standards are documen
 
 ## App UX Structure
 
-- `Home`: hero, key metrics, skills, recognition, featured media preview
+- `Home`: hero, objective, key metrics, skills, recognition, featured media preview
 - `Experience`: timeline + education + certifications
-- `Projects`: project cards + full featured media list
-- `Contact`: direct email/location/social call-to-action
+- `Projects`: technical project cards + full featured media list
+- `Contact`: email, phone, address, location, and social call-to-action
+
+## CV Data Coverage
+
+The profile dataset currently captures:
+
+- Core objective and summary
+- Expanded full-stack, QA automation, and data-analysis skill matrix
+- Multi-role industry experience from Expleo and program-based training roles
+- Technical project portfolio (mobile, web, data, and automation)
+- Certifications and media features
 
 Profile image support is optional. To enable it, set `basics.headshot` in `app/src/data/profile.json` to a file path under `app/public`, for example `/katlego-headshot.jpg`.
 
