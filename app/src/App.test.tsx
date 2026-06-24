@@ -31,7 +31,14 @@ describe("App", () => {
 
   it("renders the summary paragraphs from profile.json", () => {
     renderAppWithIntroDismissed();
-    const firstParagraph = profile.summary.split(/\n\n+/)[0];
-    expect(screen.getByText(firstParagraph)).toBeInTheDocument();
+
+    const summaryParagraphs = profile.summary
+      .split(/\n\n+/)
+      .map((paragraph) => paragraph.trim())
+      .filter(Boolean);
+
+    summaryParagraphs.forEach((paragraph) => {
+      expect(screen.getByText(paragraph)).toBeInTheDocument();
+    });
   });
 });

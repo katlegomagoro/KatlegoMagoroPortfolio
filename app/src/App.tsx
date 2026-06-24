@@ -283,6 +283,46 @@ function IntroOverlay({
     }, []);
   const displayLines = wrappedLines.length > 0 ? wrappedLines : [""];
 
+  const decorateEmojiText = (text: string) => {
+    return Array.from(text).map((char, index) => {
+      if (char === "😂" || char === "❤️" || char === "💻") {
+        return (
+          <span className="intro-emoji" key={`emoji-${index}`}>
+            {char}
+          </span>
+        );
+      }
+
+      return <span key={`char-${index}`}>{char}</span>;
+    });
+  };
+
+  const renderLineContent = (line: string, isLastLine: boolean) => {
+    const shouldAnimateEllipsis = done && isLastLine && line.endsWith("...");
+    const baseLine = shouldAnimateEllipsis ? line.slice(0, -3) : line;
+    const segments = baseLine.split("👋");
+
+    return (
+      <span className="token-string">
+        {segments.map((segment, index) => (
+          <span key={`seg-${index}`}>
+            {decorateEmojiText(segment)}
+            {index < segments.length - 1 && (
+              <span className="intro-wave intro-emoji">👋</span>
+            )}
+          </span>
+        ))}
+        {shouldAnimateEllipsis && (
+          <span className="intro-ellipsis" aria-hidden="true">
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+          </span>
+        )}
+      </span>
+    );
+  };
+
   return (
     <div
       ref={overlayRef}
@@ -322,7 +362,7 @@ function IntroOverlay({
                         className="intro-code-line intro-code-message"
                         key={`msg-${index}`}
                       >
-                        <span className="token-string">{line}</span>
+                        {renderLineContent(line, isLastLine)}
                         {isLastLine && !done && (
                           <span className="type-caret" aria-hidden="true" />
                         )}
