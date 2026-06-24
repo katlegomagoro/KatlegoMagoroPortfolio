@@ -1019,11 +1019,18 @@ function App() {
   });
 
   useEffect(() => {
+    const applyThemeToDom = (theme: ResolvedTheme) => {
+      document.documentElement.setAttribute("data-theme", theme);
+      document.body.setAttribute("data-theme", theme);
+      document.body.classList.remove("theme-light", "theme-dark");
+      document.body.classList.add(theme === "light" ? "theme-light" : "theme-dark");
+    };
+
     if (typeof window.matchMedia !== "function") {
-      document.documentElement.setAttribute(
-        "data-theme",
-        themeMode === "system" ? "light" : themeMode
-      );
+      const fallbackTheme: ResolvedTheme =
+        themeMode === "system" ? "light" : themeMode;
+      setResolvedTheme(fallbackTheme);
+      applyThemeToDom(fallbackTheme);
       return;
     }
 
@@ -1033,7 +1040,7 @@ function App() {
       const systemTheme: ResolvedTheme = media.matches ? "dark" : "light";
       const next = themeMode === "system" ? systemTheme : themeMode;
       setResolvedTheme(next);
-      document.documentElement.setAttribute("data-theme", next);
+      applyThemeToDom(next);
     };
 
     updateResolvedTheme();
