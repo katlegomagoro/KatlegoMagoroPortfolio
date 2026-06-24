@@ -1037,6 +1037,11 @@ function App() {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", resolvedTheme);
+    document.body.setAttribute("data-theme", resolvedTheme);
+    document.body.classList.remove("theme-light", "theme-dark");
+    document.body.classList.add(
+      resolvedTheme === "light" ? "theme-light" : "theme-dark"
+    );
   }, [resolvedTheme]);
 
   useEffect(() => {
