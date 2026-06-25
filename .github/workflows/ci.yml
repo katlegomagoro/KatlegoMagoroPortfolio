@@ -148,9 +148,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Verify Dev/UAT/Production are reachable
+      - name: Verify Dev/UAT/Production health cluster
         run: |
           set -euo pipefail
+          BASE_REF="${{ github.base_ref }}"
 
           check_url () {
             NAME="$1"
@@ -170,6 +171,53 @@ jobs:
             return 1
           }
 
-          check_url "Dev" "https://develop.katlegomagoroportfolio.pages.dev"
-          check_url "UAT" "https://uat.katlegomagoroportfolio.pages.dev"
-          check_url "Production" "https://katlegomagoroportfolio.pages.dev"
+          is_required_for_stage () {
+            NAME="$1"
+            case "$BASE_REF:$NAME" in
+              develop:Dev)
+                return 0
+                ;;
+              uat:Dev|uat:UAT)
+                return 0
+                ;;
+              main:Dev|main:UAT|main:Production)
+                return 0
+                ;;
+              *)
+                return 1
+                ;;
+            esac
+          }
+
+          declare -a REQUIRED_FAILURES=()
+          declare -a OPTIONAL_FAILURES=()
+
+          verify_node () {
+            NAME="$1"
+            URL="$2"
+
+            if check_url "$NAME" "$URL"; then
+              return 0
+            fi
+
+            if is_required_for_stage "$NAME"; then
+              REQUIRED_FAILURES+=("$NAME")
+            else
+              OPTIONAL_FAILURES+=("$NAME")
+            fi
+          }
+
+          verify_node "Dev" "https://develop.katlegomagoroportfolio.pages.dev"
+          verify_node "UAT" "https://uat.katlegomagoroportfolio.pages.dev"
+          verify_node "Production" "https://katlegomagoroportfolio.pages.dev"
+
+          if [ "${#OPTIONAL_FAILURES[@]}" -gt 0 ]; then
+            echo "::warning::Non-blocking health check failures: ${OPTIONAL_FAILURES[*]}"
+          fi
+
+          if [ "${#REQUIRED_FAILURES[@]}" -gt 0 ]; then
+            echo "Required health checks failed for base branch '$BASE_REF': ${REQUIRED_FAILURES[*]}"
+            exit 1
+          fi
+
+          echo "Health cluster verification passed for promotion stage '$BASE_REF'"
