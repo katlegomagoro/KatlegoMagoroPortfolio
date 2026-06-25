@@ -83,6 +83,14 @@ export interface ProfileFeaturedIn {
   image?: string | null;
 }
 
+export interface ProfileFeaturedVideo {
+  title: string;
+  publisher: string;
+  date: string;
+  summary: string;
+  url: string;
+}
+
 export interface Profile {
   basics: ProfileBasics;
   objective?: string;
@@ -94,4 +102,5 @@ export interface Profile {
   certifications: ProfileCertification[];
   highlights?: ProfileHighlight[];
   featuredIn?: ProfileFeaturedIn[];
+  featuredVideos?: ProfileFeaturedVideo[];
 }
