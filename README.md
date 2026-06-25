@@ -85,7 +85,10 @@ This replaced an earlier setup where Cloudflare's own Git integration auto-deplo
    - **`develop` → Dev**: deploys immediately, no approval needed. Matches `develop`'s role as "safe to break."
    - **`uat` → UAT**: **pauses and waits for your manual approval** before deploying. Go to the Actions run page for that PR merge — there's a "Review pending deployments" prompt.
    - **`main` → Production**: same manual approval pause.
-3. After deploying, a dedicated health verification job runs for each environment (Dev, UAT, Production). It hits the live URL and confirms HTTP 200, retrying up to 5 times over ~50 seconds.
+3. After deploy jobs complete, one "Health Cluster Verify" job checks Dev, UAT, and Production URLs. It always reports all three nodes, but blocking rules are promotion-stage aware:
+   - merge to `develop`: Dev must pass
+   - merge to `uat`: Dev and UAT must pass
+   - merge to `main`: Dev, UAT, and Production must pass
 
 **Why approval lives on the deploy step, not the PR review:** GitHub blocks self-approval on PR reviews, and this is a solo project with no second reviewer — so branch-protection-required-reviews would lock the repo's only developer out of merging anything. GitHub Environments (`uat`, `production`), each with a required reviewer, support self-approval by design, which is why the gate sits there instead.
 
