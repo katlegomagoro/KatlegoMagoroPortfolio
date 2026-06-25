@@ -454,13 +454,6 @@
       "image": "ELIDZ.jpg"
     },
     {
-      "name": "PAICTA AgriSec Hackathon",
-      "badge": "Project & Team Lead",
-      "description": "Led a team at the PAICTA Virtual Eastern Cape Youth Digital AgriSec Hackathon (Sep 2021), coordinating roadblocks, tracking progress, and presenting the team's project to the judging panel. Team placed 2nd out of 20 teams.",
-      "stack": ["Project Coordination", "Presentation"],
-      "link": null
-    },
-    {
       "name": "Load-Shedding Economic Impact Analysis",
       "badge": "Data Analysis",
       "description": "Analysed the economic effects of load-shedding on the South African economy as part of the Samsung Innovation Campus program, using Python, Pandas, NumPy, and web-crawled data.",
@@ -515,6 +508,20 @@
       "title": "Samsung Innovation Campus — International Youth Day Feature",
       "description": "Featured globally by Samsung as part of their International Youth Day Celebration, recognising the Samsung Innovation Campus program's role in developing emerging tech talent.",
       "stats": []
+    },
+    {
+      "title": "PAICTA Virtual Hackathon Final Stage — 2nd Place",
+      "description": "Reached the final presentation stage at the PAICTA Virtual Eastern Cape Youth Digital AgriSec Hackathon and finished 2nd place out of 20 teams.",
+      "stats": [
+        {
+          "value": "2nd",
+          "label": "Final placing"
+        },
+        {
+          "value": "20",
+          "label": "Teams competed"
+        }
+      ]
     }
   ],
   "featuredIn": [
@@ -546,6 +553,36 @@
       "summary": "National tech media coverage profiling Katlego as a success story of Expleo's Digital Skills Factory initiative, run in partnership with the Youth Employment Service (YES) programme, on his transition into a qualified software developer.",
       "url": "https://www.itweb.co.za/article/expleo-sa-digital-skills-factory-celebrates-success-in-partnership-with-yes-programme/6GxRKMYQrBQMb3Wj",
       "image": "Yes_Expleo_internship.jpg"
+    },
+    {
+      "title": "International Youth Day 2023: How Samsung Empowers the Innovators of Tomorrow",
+      "publisher": "Samsung Global Newsroom",
+      "date": "2023-08-11",
+      "summary": "Global Samsung feature spotlighting youth innovation stories, including Katlego Magoro's Samsung Innovation Campus journey in South Africa.",
+      "url": "https://news.samsung.com/global/international-youth-day-2023-how-samsung-empowers-the-innovators-of-tomorrow"
+    },
+    {
+      "title": "PAICTA Virtual Eastern Cape Youth Digital AgriSec Hackathon — Final Stage Presentation",
+      "publisher": "YouTube",
+      "date": "2021-09-01",
+      "summary": "Final-stage presentation where Katlego's team pitched their solution and secured 2nd place at the PAICTA virtual hackathon.",
+      "url": "https://www.youtube.com/watch?v=fGWFK-On3tI"
+    }
+  ],
+  "featuredVideos": [
+    {
+      "title": "Introducing the Digital Skills Factory in South Africa (EN)",
+      "publisher": "YouTube",
+      "date": "2024-01-01",
+      "summary": "YES and Expleo Digital Skills Factory feature video highlighting the programme's impact and participant stories, including Katlego's journey.",
+      "url": "https://www.youtube.com/watch?v=YvhZwg2N9uQ"
+    },
+    {
+      "title": "PAICTA Hackathon Final Stage Presentation",
+      "publisher": "YouTube",
+      "date": "2021-09-01",
+      "summary": "Katlego's final-stage hackathon presentation where the team placed second in the competition.",
+      "url": "https://www.youtube.com/watch?v=fGWFK-On3tI"
     }
   ]
 }

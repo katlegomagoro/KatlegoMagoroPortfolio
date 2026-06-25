@@ -125,6 +125,35 @@ function socialEntries(profile: Profile) {
   );
 }
 
+function toYouTubeEmbedUrl(url: string): string | null {
+  try {
+    const parsed = new URL(url);
+
+    if (parsed.hostname === "youtu.be") {
+      const id = parsed.pathname.slice(1);
+      return id ? `https://www.youtube.com/embed/${id}` : null;
+    }
+
+    if (
+      parsed.hostname === "youtube.com" ||
+      parsed.hostname === "www.youtube.com"
+    ) {
+      if (parsed.pathname === "/watch") {
+        const id = parsed.searchParams.get("v");
+        return id ? `https://www.youtube.com/embed/${id}` : null;
+      }
+
+      if (parsed.pathname.startsWith("/embed/")) {
+        return url;
+      }
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 function SocialLinks({ profile }: { profile: Profile }) {
   const links = socialEntries(profile);
 
@@ -442,6 +471,69 @@ function FeaturedInSection({
   );
 }
 
+function FeaturedVideosSection({
+  profile,
+  limit,
+}: {
+  profile: Profile;
+  limit?: number;
+}) {
+  const videos = profile.featuredVideos?.slice(0, limit);
+
+  if (!videos || videos.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="mx-auto max-w-5xl px-4 py-16 md:px-16">
+      <SectionHeading
+        kicker="Views"
+        title="Featured Videos"
+        blurb="Watch interviews, programme features, and hackathon presentation moments directly here."
+      />
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {videos.map((video, i) => {
+          const embedUrl = toYouTubeEmbedUrl(video.url);
+          return (
+            <article key={i} className="bento-card">
+              {embedUrl ? (
+                <div className="mb-4 overflow-hidden rounded-lg border border-primary/20 bg-black">
+                  <iframe
+                    src={embedUrl}
+                    title={video.title}
+                    className="h-56 w-full md:h-64"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
+              ) : null}
+              <h3 className="font-headline text-lg font-semibold text-on-surface">
+                {video.title}
+              </h3>
+              <p className="mt-1 font-mono text-xs text-on-surface-variant">
+                {video.publisher} — {video.date}
+              </p>
+              <p className="mt-3 text-sm text-on-surface-variant">
+                {video.summary}
+              </p>
+              <a
+                href={video.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-block font-mono text-sm text-primary transition-colors hover:text-secondary"
+              >
+                Open video →
+              </a>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function HomePage({ profile }: { profile: Profile }) {
   const heroRef = useRef<HTMLElement | null>(null);
   const groupedSkills = profile.skills.reduce<Record<SkillGroupKey, string[]>>(
@@ -733,6 +825,7 @@ function RecognitionPage({ profile }: { profile: Profile }) {
       )}
 
       <FeaturedInSection profile={profile} />
+      <FeaturedVideosSection profile={profile} />
     </>
   );
 }
