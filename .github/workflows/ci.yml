@@ -92,6 +92,13 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=katlegomagoroportfolio --branch=develop
 
+  verify-dev-health:
+    name: "Health Verify - Dev"
+    if: ${{ github.event.action == 'closed' && github.event.pull_request.merged == true && github.base_ref == 'develop' }}
+    needs: deploy-dev
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Verify Dev is reachable
         run: |
           URL="https://develop.katlegomagoroportfolio.pages.dev"
@@ -130,6 +137,13 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=katlegomagoroportfolio --branch=uat
 
+  verify-uat-health:
+    name: "Health Verify - UAT"
+    if: ${{ github.event.action == 'closed' && github.event.pull_request.merged == true && github.base_ref == 'uat' }}
+    needs: deploy-uat
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Verify UAT is reachable
         run: |
           URL="https://uat.katlegomagoroportfolio.pages.dev"
@@ -168,6 +182,13 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=katlegomagoroportfolio --branch=main
 
+  verify-production-health:
+    name: "Health Verify - Production"
+    if: ${{ github.event.action == 'closed' && github.event.pull_request.merged == true && github.base_ref == 'main' }}
+    needs: deploy-production
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Verify Production is reachable
         run: |
           URL="https://katlegomagoroportfolio.pages.dev"
