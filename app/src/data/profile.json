@@ -1,80 +1,595 @@
 {
-  "_comment": "STRUCTURE FOR REVIEW ONLY — placeholder values throughout. Nothing here is final. Once approved, real CV content gets filled in.",
-
   "basics": {
-    "name": "Full Name",
-    "title": "Job Title / Headline",
-    "location": "City, Country",
-    "email": "you@example.com",
-    "phone": "+27 00 000 0000",
+    "name": "Katlego Magoro",
+    "title": "Full Stack Developer — Software, Test Quality Assurance and Data Engineering",
+    "location": "Pretoria, South Africa",
+    "address": "Pretoria / Johannesburg, South Africa",
+    "email": "katlegomagoro98@gmail.com",
+    "headshot": "/Profile_katlego.png",
+    "phone": null,
     "links": {
-      "linkedin": "https://linkedin.com/in/...",
-      "github": "https://github.com/...",
-      "twitter": "https://twitter.com/...",
-      "instagram": "https://instagram.com/..."
-    }
+      "linkedin": "https://www.linkedin.com/in/katlego-magoro-288b08236/",
+      "github": "https://github.com/katlegomagoro",
+      "twitter": "https://x.com/katlegomagoro8?s=11",
+      "instagram": "https://www.instagram.com/katlegomagoro/"
+    },
+    "image": "Profile_katlego.png"
   },
-
-  "summary": "Two to four sentences. The 'objective' paragraph from the CV — who you are, what you specialise in, what kind of value you bring.",
-
+  "objective": "Hi 👋, I'm Katlego Magoro. Before anything else, I'm a problem solver, that's why I became a developer 💻. Code is just how I choose to solve them. I genuinely believe tech is one of the most powerful tools we have, powerful enough that I plan to be a better version of Elon Musk and stop world hunger one day 😂. No pressure on me though. I build meaningful systems, the kind that take on real-life problems and actually fix them. Hop in and get to know more about me ❤️...",
+  "summary": "I am a proactive Software Developer and Data Engineer with a strong foundation in Java, C#, Python, .NET, and C++. My expertise spans software and application development, web development, and data analysis, with a focus on technologies such as Blazor, JMeter, and Rest Assured. My experience also includes software quality engineering, emphasizing test automation and Agile methodologies using Selenium, Robot Framework, and CI/CD pipelines.\n\nCurrently at Expleo Group, I work across full-stack engineering, collaborating with cross-functional teams to deliver scalable, high-performance solutions. My role covers the full software development lifecycle from design and architecture to deployment and production support, while continuously aligning with evolving engineering trends and delivery practices.\n\nPreviously, I served as a Software Quality Engineer Intern and contributed to major testing initiatives, including POS and API-driven systems. I also worked on data-focused projects such as analysing the economic impacts of load shedding in South Africa. With a Diploma in ICT Application Development from Walter Sisulu University and a strong commitment to continuous learning, I aim to deliver software that is practical, reliable, and impactful.",
   "skills": [
-    { "name": "C# / .NET 8", "category": "backend" },
-    { "name": "Python", "category": "language" },
-    { "name": "SQL Server", "category": "database" },
-    { "name": "Azure DevOps", "category": "devops" }
+    {
+      "name": "C#",
+      "category": "primary-stack"
+    },
+    {
+      "name": ".NET",
+      "category": "primary-stack"
+    },
+    {
+      "name": "ASP.NET Core",
+      "category": "primary-stack"
+    },
+    {
+      "name": "Blazor",
+      "category": "primary-stack"
+    },
+    {
+      "name": "SQL Server",
+      "category": "primary-stack"
+    },
+    {
+      "name": "Azure DevOps",
+      "category": "primary-stack"
+    },
+    {
+      "name": "Git",
+      "category": "primary-stack"
+    },
+    {
+      "name": "CI/CD",
+      "category": "devops"
+    },
+    {
+      "name": "Azure DevOps Pipelines",
+      "category": "devops"
+    },
+    {
+      "name": "GitHub Actions",
+      "category": "devops"
+    },
+    {
+      "name": "Jenkins",
+      "category": "devops"
+    },
+    {
+      "name": "Pipeline Agents and Self-Hosted Runners",
+      "category": "devops"
+    },
+    {
+      "name": "Deployment Health Monitoring",
+      "category": "devops"
+    },
+    {
+      "name": "RESTful APIs",
+      "category": "backend"
+    },
+    {
+      "name": "OData",
+      "category": "backend"
+    },
+    {
+      "name": "LINQ",
+      "category": "backend"
+    },
+    {
+      "name": "MVC Architecture",
+      "category": "backend"
+    },
+    {
+      "name": "SOLID Principles",
+      "category": "backend"
+    },
+    {
+      "name": "Dependency Injection",
+      "category": "backend"
+    },
+    {
+      "name": "Microservices",
+      "category": "backend"
+    },
+    {
+      "name": "Microservices Architecture",
+      "category": "backend"
+    },
+    {
+      "name": "MediatR (CQRS)",
+      "category": "backend"
+    },
+    {
+      "name": "Domain-Driven Design",
+      "category": "backend"
+    },
+    {
+      "name": "API Gateway Patterns",
+      "category": "backend"
+    },
+    {
+      "name": "Inter-Service Communication",
+      "category": "backend"
+    },
+    {
+      "name": "Clean Architecture",
+      "category": "backend"
+    },
+    {
+      "name": "EF Core 9",
+      "category": "backend"
+    },
+    {
+      "name": "PostgreSQL",
+      "category": "database"
+    },
+    {
+      "name": "MySQL",
+      "category": "database"
+    },
+    {
+      "name": "Oracle",
+      "category": "database"
+    },
+    {
+      "name": "MongoDB",
+      "category": "database"
+    },
+    {
+      "name": "SQLite",
+      "category": "database"
+    },
+    {
+      "name": "Firebase Cloud Database",
+      "category": "database"
+    },
+    {
+      "name": "Razor",
+      "category": "frontend"
+    },
+    {
+      "name": "HTML5",
+      "category": "frontend"
+    },
+    {
+      "name": "CSS3",
+      "category": "frontend"
+    },
+    {
+      "name": "JavaScript",
+      "category": "frontend"
+    },
+    {
+      "name": "jQuery",
+      "category": "frontend"
+    },
+    {
+      "name": "MudBlazor",
+      "category": "frontend"
+    },
+    {
+      "name": "Blazor Server",
+      "category": "frontend"
+    },
+    {
+      "name": "Blazored.LocalStorage",
+      "category": "frontend"
+    },
+    {
+      "name": "Android Development (Java)",
+      "category": "mobile"
+    },
+    {
+      "name": "ISTQB CTFL",
+      "category": "testing"
+    },
+    {
+      "name": "Selenium (Java)",
+      "category": "testing"
+    },
+    {
+      "name": "Robot Framework",
+      "category": "testing"
+    },
+    {
+      "name": "Rest Assured",
+      "category": "testing"
+    },
+    {
+      "name": "JMeter",
+      "category": "testing"
+    },
+    {
+      "name": "REST / API Testing",
+      "category": "testing"
+    },
+    {
+      "name": "Python",
+      "category": "language"
+    },
+    {
+      "name": "Java",
+      "category": "language"
+    },
+    {
+      "name": "C++",
+      "category": "language"
+    },
+    {
+      "name": "PL/SQL",
+      "category": "language"
+    },
+    {
+      "name": "Salesforce",
+      "category": "integration"
+    },
+    {
+      "name": "Salesforce API Integration",
+      "category": "integration"
+    },
+    {
+      "name": "ELSA Workflows",
+      "category": "integration"
+    },
+    {
+      "name": "MCP",
+      "category": "integration"
+    },
+    {
+      "name": "Pandas",
+      "category": "data"
+    },
+    {
+      "name": "NumPy",
+      "category": "data"
+    },
+    {
+      "name": "Web Crawling",
+      "category": "data"
+    },
+    {
+      "name": "Statistical Analysis",
+      "category": "data"
+    },
+    {
+      "name": "Sentiment Analysis",
+      "category": "data"
+    },
+    {
+      "name": "Data Analysis",
+      "category": "data"
+    },
+    {
+      "name": "Automation Scripts",
+      "category": "practice"
+    },
+    {
+      "name": "Agile Methodology",
+      "category": "practice"
+    },
+    {
+      "name": "Git and GitHub",
+      "category": "practice"
+    },
+    {
+      "name": "HTML and CSS",
+      "category": "practice"
+    }
   ],
-
   "experience": [
     {
-      "role": "Job Title",
-      "org": "Company Name",
-      "location": "City, Country",
+      "role": "Full Stack .NET Developer and Embedded Systems Engineer",
+      "org": "Expleo Group",
+      "location": "Johannesburg, South Africa (Remote)",
       "startDate": "2026-02",
       "endDate": null,
       "current": true,
       "bullets": [
-        "Responsibility or achievement, one per bullet.",
-        "Another bullet — kept short and specific."
+        "Lead full stack development using C#, .NET, ASP.NET Core, Blazor, EF Core, and SQL Server for enterprise-grade distributed systems.",
+        "Design, build, and maintain CI/CD pipelines across Azure DevOps Pipelines, GitHub Actions, and Jenkins, including self-hosted runners and deployment stages.",
+        "Monitor pipeline health, build statuses, and deployment dashboards to ensure reliable continuous delivery across environments.",
+        "Implement automated deployment workflows across build, test, and release stages with environment-specific configurations and rollback strategies.",
+        "Design and implement scalable RESTful and OData APIs with responsive front-end components using Razor, HTML, CSS, and JavaScript.",
+        "Own system architecture, domain modelling, database design, indexing strategy, and performance optimisation using LINQ and EF Core.",
+        "Apply SOLID principles, clean architecture, and dependency injection to deliver maintainable, production-ready solutions.",
+        "Develop secure authentication and role-based access control across distributed systems.",
+        "Conduct code reviews, mentor junior developers, and enforce engineering standards in agile teams."
+      ],
+      "skills": [
+        "C#",
+        ".NET",
+        "ASP.NET Core",
+        "Blazor",
+        "EF Core 9",
+        "SQL Server",
+        "Azure DevOps Pipelines",
+        "GitHub Actions",
+        "Jenkins",
+        "RESTful APIs",
+        "OData",
+        "LINQ",
+        "Clean Architecture",
+        "Dependency Injection"
+      ],
+      "keyWin": "Promoted from Associate to Embedded Systems Developer within 2 years and took on architecture ownership, team mentoring, and end-to-end CI/CD engineering across Azure DevOps, GitHub Actions, and Jenkins."
+    },
+    {
+      "role": "Associate Software Developer",
+      "org": "Expleo Group",
+      "location": "Johannesburg, South Africa (Hybrid)",
+      "startDate": "2024-04",
+      "endDate": "2026-02",
+      "current": false,
+      "bullets": [
+        "Developed full stack features in C#, .NET, Blazor Server, EF Core, and SQL Server for enterprise reporting and account management platforms.",
+        "Took end-to-end ownership of API integrations, database structures, reusable components, and UI improvements.",
+        "Optimised SQL queries and EF Core relationships, reducing load times across key reporting screens.",
+        "Integrated Salesforce through ELSA workflows to automate data synchronisation and improve internal portal functionality.",
+        "Contributed to CI/CD pipeline configuration in Azure DevOps and supported junior developers through reviews and technical guidance."
+      ],
+      "skills": [
+        "C#",
+        ".NET",
+        "Blazor Server",
+        "EF Core 9",
+        "SQL Server",
+        "Salesforce API Integration",
+        "ELSA Workflows",
+        "Azure DevOps",
+        "CI/CD"
+      ],
+      "keyWin": "Delivered a Salesforce-ELSA integration that removed manual data entry across internal portals and saved hours of weekly team effort."
+    },
+    {
+      "role": "Software Quality Engineer Intern",
+      "org": "Expleo Group",
+      "location": "Johannesburg, South Africa (Hybrid)",
+      "startDate": "2023-04",
+      "endDate": "2024-03",
+      "current": false,
+      "bullets": [
+        "Led end-to-end QA across financial and retail systems in four African countries, ensuring reliability and compliance.",
+        "Built automated regression suites using Selenium (Java), Robot Framework, and RestAssured.",
+        "Integrated test automation into CI/CD pipelines with Jenkins and Azure DevOps.",
+        "Performed API testing, compatibility testing, and functional validation in agile delivery cycles."
+      ],
+      "skills": [
+        "ISTQB CTFL",
+        "Selenium (Java)",
+        "Robot Framework",
+        "Rest Assured",
+        "Jenkins",
+        "Azure DevOps",
+        "REST / API Testing",
+        "CI/CD"
+      ],
+      "keyWin": "Achieved ISTQB CTFL with 77.5% while delivering full QA coverage across multi-country financial systems."
+    },
+    {
+      "role": "Software Developer Trainee — Samsung Innovation Campus",
+      "org": "Samsung Innovation Campus, in partnership with Walter Sisulu University",
+      "location": "South Africa",
+      "startDate": "2022-08",
+      "endDate": "2022-12",
+      "current": false,
+      "bullets": [
+        "Led high-impact analysis of South Africa's load-shedding economic impact using Python, Pandas, and NumPy.",
+        "Built mobile and web applications using Android Studio (Java), Firebase, HTML, and CSS.",
+        "Featured by Samsung South Africa and Samsung Global Youth Day People in Tech publications.",
+        "Presented the cohort closing speech to Samsung and government leadership and later returned as a first-cohort representative for the 2024 graduation event."
+      ],
+      "skills": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "Android Development (Java)",
+        "Firebase Cloud Database",
+        "HTML5",
+        "CSS3",
+        "Data Analysis"
+      ],
+      "keyWin": "Delivered a nationally visible data analysis project and was invited back as a first-cohort representative speaker.",
+      "image": "Samsung_Innovation_Award.jpg"
+    },
+    {
+      "role": "Research Project Coordinator",
+      "org": "East London Industrial Development Zone (ELIDZ) Science and Technology Park Incubation Program",
+      "location": "East London, South Africa",
+      "startDate": "2021-11",
+      "endDate": "2022-10",
+      "current": false,
+      "bullets": [
+        "Won the ELIDZ ICT hackathon and helped secure R30,000 in prize funding and R100,000 incubation support.",
+        "Conducted data analysis and technical support to improve operational efficiency across community-facing projects.",
+        "Contributed research-backed insights to incubation projects focused on practical regional impact."
+      ],
+      "skills": [
+        "Data Analysis",
+        "Technical Support",
+        "Research",
+        "Project Coordination"
+      ],
+      "keyWin": "Part of the winning team that secured both immediate prize funding and incubation investment for continued development."
+    },
+    {
+      "role": "Social Secretary, IT Department Committee",
+      "org": "Walter Sisulu University",
+      "location": "Queenstown, South Africa",
+      "startDate": "2020-03",
+      "endDate": "2021-03",
+      "current": false,
+      "bullets": [
+        "Involved in the formation and development of the IT Society at Walter Sisulu University's Komani Campus.",
+        "Assisted the President and board of directors in planning and executing social events and facilitating committee meetings."
       ]
     }
   ],
-
   "projects": [
     {
-      "name": "Project Name",
-      "badge": "short category label, e.g. 'Data Analysis'",
-      "description": "One or two sentences on what it does and why it matters.",
-      "stack": ["Java", "Firebase", "Android Studio"],
+      "name": "ELIDZ ICT Hackathon — Team Code Brigaders",
+      "badge": "Hackathon Win",
+      "description": "Won the East London IDZ Science and Technology Park ICT Hackathon Challenge (Nov 2021) as part of Team Code Brigaders, presenting a health application designed to improve the rate at which services are rendered in public clinics in rural areas. The win earned R30,000 and a 12-month incubation place with R100,000 in funding.",
+      "stack": ["Data Analysis", "Technical Support", "Health-Tech"],
+      "link": "https://www.elidz.co.za/elidz-stp-hosts-a-successful-ict-hackathon-challenge/",
+      "image": "ELIDZ.jpg"
+    },
+    {
+      "name": "Load-Shedding Economic Impact Analysis",
+      "badge": "Data Analysis",
+      "description": "Analysed the economic effects of load-shedding on the South African economy as part of the Samsung Innovation Campus program, using Python, Pandas, NumPy, and web-crawled data.",
+      "stack": ["Python", "Pandas", "NumPy", "Web Crawling"],
       "link": null
     }
   ],
-
   "education": [
     {
-      "degree": "Qualification Name (NQF level)",
-      "school": "Institution Name",
-      "startDate": "2023-02",
+      "degree": "Advanced Diploma in Information Resource Management (Information Technology)",
+      "school": "University of South Africa (UNISA)",
+      "startDate": "2023-01",
       "endDate": "2025-12",
-      "notes": "Optional extra line — average, distinctions, focus area."
+      "notes": "Applied advanced information systems and data management concepts in real-world organisational contexts; strengthened software development through structured analysis, system modelling, and solution design."
+    },
+    {
+      "degree": "Diploma in Information and Communication Technology, specialising in Application Development",
+      "school": "Walter Sisulu University",
+      "startDate": "2020-02",
+      "endDate": "2022-12",
+      "notes": "73% average, with distinctions in 7 of 12 modules."
     }
   ],
-
   "certifications": [
     {
-      "name": "Certification Name",
-      "issuer": "Issuing body, if relevant",
+      "name": "ISTQB Foundation Level (CTFL)",
+      "issuer": "Southern African Software Testing Qualifications Board (SASTQB)",
       "year": "2024"
+    },
+    {
+      "name": "Job Oriented — Practical Software QA Testing",
+      "issuer": "Udemy",
+      "year": "2023"
     }
   ],
-
   "highlights": [
     {
-      "title": "Headline of the achievement",
-      "description": "Short story / context.",
+      "title": "ELIDZ Hackathon Win",
+      "description": "I won the East London IDZ Science and Technology Park ICT Hackathon Challenge with Team Code Brigaders (Nov 2021), securing prize money and a year-long incubation place.",
       "stats": [
-        { "value": "R30,000", "label": "Prize won" },
-        { "value": "R100,000", "label": "Funding secured" }
+        {
+          "value": "R30,000",
+          "label": "Prize won"
+        },
+        {
+          "value": "R100,000",
+          "label": "Incubation funding"
+        }
       ]
+    },
+    {
+      "title": "Samsung Innovation Campus — International Youth Day Feature",
+      "description": "I was featured globally by Samsung as part of International Youth Day, where my Samsung Innovation Campus journey was recognized as an emerging-tech talent story.",
+      "stats": [],
+      "url": "https://news.samsung.com/global/international-youth-day-2023-how-samsung-empowers-the-innovators-of-tomorrow",
+      "image": "Profile_katlego.png"
+    },
+    {
+      "title": "PAICTA Virtual Hackathon Final Stage — 2nd Place",
+      "description": "I reached the final presentation stage at the PAICTA Virtual Eastern Cape Youth Digital AgriSec Hackathon and finished 2nd place out of 20 teams.",
+      "stats": [
+        {
+          "value": "2nd",
+          "label": "Final placing"
+        },
+        {
+          "value": "20",
+          "label": "Teams competed"
+        }
+      ],
+      "image": "PAICTA_Logo.jpg",
+      "url": "https://www.youtube.com/watch?v=fGWFK-On3tI"
+    },
+    {
+      "title": "Hackathon Participant @ Rivonia Circle Hackathon (in partnership with Geekulcha)",
+      "description": "I participated in the Rivonia Circle Hackathon where we built civic-tech ideas under the South Africa 2.0 challenge.",
+      "dateRange": "Aug 2022 — Aug 2022",
+      "location": "Tshimologong Precinct, Johannesburg, South Africa",
+      "image": "Rivonia_Cycle_hcaython.jpeg",
+      "bullets": [
+        "Participated in the Rivonia Circle Hackathon, hosted in partnership with Geekulcha at the Tshimologong Precinct.",
+        "Hacked on the 'South Africa 2.0' challenge — designing tech platforms and tools to drive digital community activism, policy engagement, and democratic participation."
+      ]
+    }
+  ],
+  "featuredIn": [
+    {
+      "title": "ELIDZ STP Hosts a Successful ICT Hackathon Challenge",
+      "publisher": "East London IDZ SOC Ltd",
+      "date": "2022-04-13",
+      "summary": "This official ELIDZ press statement covers our Team Code Brigaders win in the November 2021 ICT Hackathon Challenge, where we built a health-focused solution to improve service delivery in rural public clinics. Note: the release spells my surname as 'Mogoro'.",
+      "url": "https://www.elidz.co.za/elidz-stp-hosts-a-successful-ict-hackathon-challenge/",
+      "image": "ELIDZ.jpg"
+    },
+    {
+      "title": "Samsung programme helps fuel the dreams of a young technologist",
+      "publisher": "Samsung Newsroom South Africa",
+      "date": "2023-06-30",
+      "summary": "This is my personal Samsung feature covering my path into ICT, my Diploma journey at Walter Sisulu University, and my graduation from the first Samsung Innovation Campus cohort in South Africa.",
+      "url": "https://news.samsung.com/za/samsung-programme-helps-fuel-the-dreams-of-a-young-technologist",
+      "image": "Samsung_Innovation_Award.jpg"
+    },
+    {
+      "title": "Final-year IT students graduate in AI education thanks to WSU-Samsung partnership",
+      "publisher": "Walter Sisulu University",
+      "date": "2024-02-27",
+      "summary": "This WSU feature covers the 2024 Samsung Innovation Campus AI graduation ceremony where I returned as a first-cohort representative and addressed graduates alongside Samsung leadership and government stakeholders.",
+      "url": "https://www.wsu.ac.za/en/component/content/article/final-year-it-students-graduate-in-ai-education-thanks-to-wsu-samsung-partnership?catid=18&Itemid=101",
+      "image": "SiC_Keynot_2024.jpg"
+    },
+    {
+      "title": "Expleo SA Digital Skills Factory celebrates success in partnership with YES programme",
+      "publisher": "ITWeb",
+      "date": "2024-10-07",
+      "summary": "This national ITWeb article shares my growth story through Expleo's Digital Skills Factory in partnership with YES, and how the programme helped me transition into a qualified software developer.",
+      "url": "https://www.itweb.co.za/article/expleo-sa-digital-skills-factory-celebrates-success-in-partnership-with-yes-programme/6GxRKMYQrBQMb3Wj",
+      "image": "Yes_Expleo_internship.jpg"
+    },
+    {
+      "title": "International Youth Day 2023: How Samsung Empowers the Innovators of Tomorrow",
+      "publisher": "Samsung Global Newsroom",
+      "date": "2023-08-11",
+      "summary": "This Samsung Global feature highlights youth innovation stories and includes my Samsung Innovation Campus journey from South Africa.",
+      "url": "https://news.samsung.com/global/international-youth-day-2023-how-samsung-empowers-the-innovators-of-tomorrow",
+      "image": "Profile_katlego.png"
+    },
+    {
+      "title": "PAICTA Virtual Eastern Cape Youth Digital AgriSec Hackathon — Final Stage Presentation",
+      "publisher": "YouTube",
+      "date": "2021-09-01",
+      "summary": "This is my final-stage presentation at the PAICTA virtual hackathon, where my team pitched our solution and secured 2nd place.",
+      "url": "https://www.youtube.com/live/fGWFK-On3tI?si=Y04iUF-eIt4Zu-HL&t=3236",
+      "image": "PAICTA_Logo.jpg"
+    }
+  ],
+  "featuredVideos": [
+    {
+      "title": "Introducing the Digital Skills Factory in South Africa (EN)",
+      "publisher": "YouTube",
+      "date": "2024-01-01",
+      "summary": "YES and Expleo Digital Skills Factory feature video highlighting the programme's impact and participant stories, including my journey.",
+      "url": "https://www.youtube.com/watch?v=YvhZwg2N9uQ"
+    },
+    {
+      "title": "PAICTA Hackathon Final Stage Presentation",
+      "publisher": "YouTube",
+      "date": "2021-09-01",
+      "summary": "My final-stage hackathon presentation where our team placed second in the competition.",
+      "url": "https://www.youtube.com/live/fGWFK-On3tI?si=Y04iUF-eIt4Zu-HL&t=3236"
     }
   ]
 }

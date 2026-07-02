@@ -92,21 +92,6 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=katlegomagoroportfolio --branch=develop
 
-      - name: Verify Dev is reachable
-        run: |
-          URL="https://develop.katlegomagoroportfolio.pages.dev"
-          for i in 1 2 3 4 5; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
-            if [ "$STATUS" = "200" ]; then
-              echo "Dev healthy: $URL returned 200"
-              exit 0
-            fi
-            echo "Attempt $i: got $STATUS, retrying in 10s..."
-            sleep 10
-          done
-          echo "Dev did not return 200 after 5 attempts"
-          exit 1
-
   # UAT pauses here for manual approval — requires the 'uat' GitHub
   # Environment to exist with you as a required reviewer (see README).
   deploy-uat:
@@ -129,21 +114,6 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=katlegomagoroportfolio --branch=uat
-
-      - name: Verify UAT is reachable
-        run: |
-          URL="https://uat.katlegomagoroportfolio.pages.dev"
-          for i in 1 2 3 4 5; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
-            if [ "$STATUS" = "200" ]; then
-              echo "UAT healthy: $URL returned 200"
-              exit 0
-            fi
-            echo "Attempt $i: got $STATUS, retrying in 10s..."
-            sleep 10
-          done
-          echo "UAT did not return 200 after 5 attempts"
-          exit 1
 
   # Production pauses here for manual approval — requires the 'production'
   # GitHub Environment to exist with you as a required reviewer.
@@ -168,17 +138,86 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=katlegomagoroportfolio --branch=main
 
-      - name: Verify Production is reachable
+  verify-health-cluster:
+    name: "Health Cluster Verify"
+    if: ${{ always() && github.event.action == 'closed' && github.event.pull_request.merged == true }}
+    needs:
+      - deploy-dev
+      - deploy-uat
+      - deploy-production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Verify Dev/UAT/Production health cluster
         run: |
-          URL="https://katlegomagoroportfolio.pages.dev"
-          for i in 1 2 3 4 5; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
-            if [ "$STATUS" = "200" ]; then
-              echo "Production healthy: $URL returned 200"
-              exit 0
+          set -euo pipefail
+          BASE_REF="${{ github.base_ref }}"
+
+          check_url () {
+            NAME="$1"
+            URL="$2"
+
+            for i in 1 2 3 4 5; do
+              STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+              if [ "$STATUS" = "200" ]; then
+                echo "$NAME healthy: $URL returned 200"
+                return 0
+              fi
+              echo "$NAME attempt $i: got $STATUS, retrying in 10s..."
+              sleep 10
+            done
+
+            echo "$NAME did not return 200 after 5 attempts"
+            return 1
+          }
+
+          is_required_for_stage () {
+            NAME="$1"
+            case "$BASE_REF:$NAME" in
+              develop:Dev)
+                return 0
+                ;;
+              uat:Dev|uat:UAT)
+                return 0
+                ;;
+              main:Dev|main:UAT|main:Production)
+                return 0
+                ;;
+              *)
+                return 1
+                ;;
+            esac
+          }
+
+          declare -a REQUIRED_FAILURES=()
+          declare -a OPTIONAL_FAILURES=()
+
+          verify_node () {
+            NAME="$1"
+            URL="$2"
+
+            if check_url "$NAME" "$URL"; then
+              return 0
             fi
-            echo "Attempt $i: got $STATUS, retrying in 10s..."
-            sleep 10
-          done
-          echo "Production did not return 200 after 5 attempts"
-          exit 1
+
+            if is_required_for_stage "$NAME"; then
+              REQUIRED_FAILURES+=("$NAME")
+            else
+              OPTIONAL_FAILURES+=("$NAME")
+            fi
+          }
+
+          verify_node "Dev" "https://develop.katlegomagoroportfolio.pages.dev"
+          verify_node "UAT" "https://uat.katlegomagoroportfolio.pages.dev"
+          verify_node "Production" "https://katlegomagoroportfolio.pages.dev"
+
+          if [ "${#OPTIONAL_FAILURES[@]}" -gt 0 ]; then
+            echo "::warning::Non-blocking health check failures: ${OPTIONAL_FAILURES[*]}"
+          fi
+
+          if [ "${#REQUIRED_FAILURES[@]}" -gt 0 ]; then
+            echo "Required health checks failed for base branch '$BASE_REF': ${REQUIRED_FAILURES[*]}"
+            exit 1
+          fi
+
+          echo "Health cluster verification passed for promotion stage '$BASE_REF'"

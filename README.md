@@ -5,10 +5,29 @@ Personal portfolio site. Full architecture and engineering standards are documen
 ## Stack
 
 - React + Vite + TypeScript (`app/`)
+- Multi-page SPA routing via React Router (`/`, `/experience`, `/projects`, `/contact`)
 - Content sourced from `app/src/data/profile.json` (single source of truth)
 - Hosted on Cloudflare Pages (free tier), three environments via branch mapping
 - Tested with Vitest + React Testing Library
 - CI/CD: GitHub Actions builds, lints, format-checks, and tests every PR — then deploys via Wrangler on merge (see "Build & Deploy Pipeline" below). Cloudflare's own auto-deploy is disabled; Actions is the only deploy path.
+## App UX Structure
+
+- `Home`: hero, objective, key metrics, skills, recognition, featured media preview
+- `Experience`: timeline + education + certifications
+- `Projects`: technical project cards + full featured media list
+- `Contact`: email, phone, address, location, and social call-to-action
+
+## CV Data Coverage
+
+The profile dataset currently captures:
+
+- Core objective and summary
+- Expanded full-stack, QA automation, and data-analysis skill matrix
+- Multi-role industry experience from Expleo and program-based training roles
+- Technical project portfolio (mobile, web, data, and automation)
+- Certifications and media features
+
+Profile image support: `basics.headshot` in `app/src/data/profile.json` points to a file path under `app/public` (e.g. `/Kat_WSU.jpeg`) and is used directly as an `<img>` src on the homepage hero. Separately, `basics.image` and per-experience/per-project `image` fields point to plain filenames resolved via `app/src/assetMap.ts` against files in `app/src/assets/` — these two mechanisms exist because the project currently has two independent UI implementations being merged; this should be consolidated into one image-handling approach in Iteration 1.
 
 ## Local Setup
 
@@ -33,7 +52,7 @@ If `npm run build` fails on a clean clone, that's a bug — see NFR-4 in `ARCHIT
 | `uat`     | UAT         | `*.pages.dev` (auto-generated) |
 | `main`    | Production  | Custom domain                 |
 
-Flow of a change: `feature/xxx` → PR into `develop` → PR into `uat` → PR into `main`. No direct pushes to `uat` or `main`.
+Flow of a change: `feature/ShortPascalCase` → PR into `develop` → PR into `uat` → PR into `main`. No direct pushes to `uat` or `main`.
 
 ## Connecting Cloudflare Pages (one-time setup, done by Katlego)
 
@@ -66,7 +85,10 @@ This replaced an earlier setup where Cloudflare's own Git integration auto-deplo
    - **`develop` → Dev**: deploys immediately, no approval needed. Matches `develop`'s role as "safe to break."
    - **`uat` → UAT**: **pauses and waits for your manual approval** before deploying. Go to the Actions run page for that PR merge — there's a "Review pending deployments" prompt.
    - **`main` → Production**: same manual approval pause.
-3. After deploying, each job runs a health check — hits the live branch URL and confirms it returns 200, retrying up to 5 times over ~50 seconds.
+3. After deploy jobs complete, one "Health Cluster Verify" job checks Dev, UAT, and Production URLs. It always reports all three nodes, but blocking rules are promotion-stage aware:
+   - merge to `develop`: Dev must pass
+   - merge to `uat`: Dev and UAT must pass
+   - merge to `main`: Dev, UAT, and Production must pass
 
 **Why approval lives on the deploy step, not the PR review:** GitHub blocks self-approval on PR reviews, and this is a solo project with no second reviewer — so branch-protection-required-reviews would lock the repo's only developer out of merging anything. GitHub Environments (`uat`, `production`), each with a required reviewer, support self-approval by design, which is why the gate sits there instead.
 
