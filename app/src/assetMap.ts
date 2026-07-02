@@ -5,6 +5,7 @@ import rivoniaCircleAlt from "./assets/Riovoinia_cycle_hacjathons.jpeg";
 import samsungAward from "./assets/Samsung_Innovation_Award.jpg";
 import sicKeynote2024 from "./assets/SiC_Keynot_2024.jpg";
 import expleoFeature from "./assets/Yes_Expleo_internship.jpg";
+import paictaLogo from "./assets/PAICTA_Logo.jpg";
 
 // profile.json stores plain filename strings (e.g. "ELIDZ.jpg") rather than
 // import paths, since it's meant to stay a plain-data file that Iteration 2's
@@ -19,11 +20,15 @@ const ASSET_MAP: Record<string, string> = {
   "Samsung_Innovation_Award.jpg": samsungAward,
   "SiC_Keynot_2024.jpg": sicKeynote2024,
   "Yes_Expleo_internship.jpg": expleoFeature,
+  "PAICTA_Logo.jpg": paictaLogo,
 };
 
 export function resolveAsset(
   filename: string | null | undefined
 ): string | null {
   if (!filename) return null;
+  if (filename.startsWith("http://") || filename.startsWith("https://")) {
+    return filename;
+  }
   return ASSET_MAP[filename] ?? null;
 }

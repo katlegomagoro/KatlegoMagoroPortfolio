@@ -373,19 +373,6 @@
       "keyWin": "Achieved ISTQB CTFL with 77.5% while delivering full QA coverage across multi-country financial systems."
     },
     {
-      "role": "Hackathon Participant",
-      "org": "Rivonia Circle Hackathon (in partnership with Geekulcha)",
-      "location": "Tshimologong Precinct, Johannesburg, South Africa",
-      "startDate": "2022-08",
-      "endDate": "2022-08",
-      "current": false,
-      "bullets": [
-        "Participated in the Rivonia Circle Hackathon, hosted in partnership with Geekulcha at the Tshimologong Precinct.",
-        "Hacked on the 'South Africa 2.0' challenge — designing tech platforms and tools to drive digital community activism, policy engagement, and democratic participation."
-      ],
-      "image": "Rivonia_Cycle_hcaython.jpeg"
-    },
-    {
       "role": "Software Developer Trainee — Samsung Innovation Campus",
       "org": "Samsung Innovation Campus, in partnership with Walter Sisulu University",
       "location": "South Africa",
@@ -492,7 +479,7 @@
   "highlights": [
     {
       "title": "ELIDZ Hackathon Win",
-      "description": "Won the East London IDZ Science and Technology Park ICT Hackathon Challenge with Team Code Brigaders (Nov 2021), securing prize money and a year-long incubation place.",
+      "description": "I won the East London IDZ Science and Technology Park ICT Hackathon Challenge with Team Code Brigaders (Nov 2021), securing prize money and a year-long incubation place.",
       "stats": [
         {
           "value": "R30,000",
@@ -506,12 +493,14 @@
     },
     {
       "title": "Samsung Innovation Campus — International Youth Day Feature",
-      "description": "Featured globally by Samsung as part of their International Youth Day Celebration, recognising the Samsung Innovation Campus program's role in developing emerging tech talent.",
-      "stats": []
+      "description": "I was featured globally by Samsung as part of International Youth Day, where my Samsung Innovation Campus journey was recognized as an emerging-tech talent story.",
+      "stats": [],
+      "url": "https://news.samsung.com/global/international-youth-day-2023-how-samsung-empowers-the-innovators-of-tomorrow",
+      "image": "Profile_katlego.png"
     },
     {
       "title": "PAICTA Virtual Hackathon Final Stage — 2nd Place",
-      "description": "Reached the final presentation stage at the PAICTA Virtual Eastern Cape Youth Digital AgriSec Hackathon and finished 2nd place out of 20 teams.",
+      "description": "I reached the final presentation stage at the PAICTA Virtual Eastern Cape Youth Digital AgriSec Hackathon and finished 2nd place out of 20 teams.",
       "stats": [
         {
           "value": "2nd",
@@ -521,6 +510,19 @@
           "value": "20",
           "label": "Teams competed"
         }
+      ],
+      "image": "PAICTA_Logo.jpg",
+      "url": "https://www.youtube.com/watch?v=fGWFK-On3tI"
+    },
+    {
+      "title": "Hackathon Participant @ Rivonia Circle Hackathon (in partnership with Geekulcha)",
+      "description": "I participated in the Rivonia Circle Hackathon where we built civic-tech ideas under the South Africa 2.0 challenge.",
+      "dateRange": "Aug 2022 — Aug 2022",
+      "location": "Tshimologong Precinct, Johannesburg, South Africa",
+      "image": "Rivonia_Cycle_hcaython.jpeg",
+      "bullets": [
+        "Participated in the Rivonia Circle Hackathon, hosted in partnership with Geekulcha at the Tshimologong Precinct.",
+        "Hacked on the 'South Africa 2.0' challenge — designing tech platforms and tools to drive digital community activism, policy engagement, and democratic participation."
       ]
     }
   ],
@@ -529,28 +531,31 @@
       "title": "ELIDZ STP Hosts a Successful ICT Hackathon Challenge",
       "publisher": "East London IDZ SOC Ltd",
       "date": "2022-04-13",
-      "summary": "Official ELIDZ press statement naming Team Code Brigaders (including Katlego) as winners of the November 2021 ICT Hackathon Challenge for a health application aimed at improving service delivery in rural public clinics. Note: the release spells the surname 'Mogoro'.",
-      "url": "https://www.elidz.co.za/elidz-stp-hosts-a-successful-ict-hackathon-challenge/"
+      "summary": "This official ELIDZ press statement covers our Team Code Brigaders win in the November 2021 ICT Hackathon Challenge, where we built a health-focused solution to improve service delivery in rural public clinics. Note: the release spells my surname as 'Mogoro'.",
+      "url": "https://www.elidz.co.za/elidz-stp-hosts-a-successful-ict-hackathon-challenge/",
+      "image": "ELIDZ.jpg"
     },
     {
       "title": "Samsung programme helps fuel the dreams of a young technologist",
       "publisher": "Samsung Newsroom South Africa",
       "date": "2023-06-30",
-      "summary": "A personal feature on Katlego's path into ICT, his Diploma at Walter Sisulu University, and his graduation from the first Samsung Innovation Campus cohort in South Africa.",
-      "url": "https://news.samsung.com/za/samsung-programme-helps-fuel-the-dreams-of-a-young-technologist"
+      "summary": "This is my personal Samsung feature covering my path into ICT, my Diploma journey at Walter Sisulu University, and my graduation from the first Samsung Innovation Campus cohort in South Africa.",
+      "url": "https://news.samsung.com/za/samsung-programme-helps-fuel-the-dreams-of-a-young-technologist",
+      "image": "Samsung_Innovation_Award.jpg"
     },
     {
       "title": "Final-year IT students graduate in AI education thanks to WSU-Samsung partnership",
       "publisher": "Walter Sisulu University",
       "date": "2024-02-27",
-      "summary": "Coverage of the 2024 Samsung Innovation Campus AI graduation ceremony, where Katlego served as the main student representative for the first cohort, addressing new graduates alongside Samsung executives and Minister Stella Ndabeni-Abrahams.",
-      "url": "https://www.wsu.ac.za/en/component/content/article/final-year-it-students-graduate-in-ai-education-thanks-to-wsu-samsung-partnership?catid=18&Itemid=101"
+      "summary": "This WSU feature covers the 2024 Samsung Innovation Campus AI graduation ceremony where I returned as a first-cohort representative and addressed graduates alongside Samsung leadership and government stakeholders.",
+      "url": "https://www.wsu.ac.za/en/component/content/article/final-year-it-students-graduate-in-ai-education-thanks-to-wsu-samsung-partnership?catid=18&Itemid=101",
+      "image": "SiC_Keynot_2024.jpg"
     },
     {
       "title": "Expleo SA Digital Skills Factory celebrates success in partnership with YES programme",
       "publisher": "ITWeb",
       "date": "2024-10-07",
-      "summary": "National tech media coverage profiling Katlego as a success story of Expleo's Digital Skills Factory initiative, run in partnership with the Youth Employment Service (YES) programme, on his transition into a qualified software developer.",
+      "summary": "This national ITWeb article shares my growth story through Expleo's Digital Skills Factory in partnership with YES, and how the programme helped me transition into a qualified software developer.",
       "url": "https://www.itweb.co.za/article/expleo-sa-digital-skills-factory-celebrates-success-in-partnership-with-yes-programme/6GxRKMYQrBQMb3Wj",
       "image": "Yes_Expleo_internship.jpg"
     },
@@ -558,15 +563,17 @@
       "title": "International Youth Day 2023: How Samsung Empowers the Innovators of Tomorrow",
       "publisher": "Samsung Global Newsroom",
       "date": "2023-08-11",
-      "summary": "Global Samsung feature spotlighting youth innovation stories, including Katlego Magoro's Samsung Innovation Campus journey in South Africa.",
-      "url": "https://news.samsung.com/global/international-youth-day-2023-how-samsung-empowers-the-innovators-of-tomorrow"
+      "summary": "This Samsung Global feature highlights youth innovation stories and includes my Samsung Innovation Campus journey from South Africa.",
+      "url": "https://news.samsung.com/global/international-youth-day-2023-how-samsung-empowers-the-innovators-of-tomorrow",
+      "image": "Profile_katlego.png"
     },
     {
       "title": "PAICTA Virtual Eastern Cape Youth Digital AgriSec Hackathon — Final Stage Presentation",
       "publisher": "YouTube",
       "date": "2021-09-01",
-      "summary": "Final-stage presentation where Katlego's team pitched their solution and secured 2nd place at the PAICTA virtual hackathon.",
-      "url": "https://www.youtube.com/watch?v=fGWFK-On3tI"
+      "summary": "This is my final-stage presentation at the PAICTA virtual hackathon, where my team pitched our solution and secured 2nd place.",
+      "url": "https://www.youtube.com/live/fGWFK-On3tI?si=Y04iUF-eIt4Zu-HL&t=3236",
+      "image": "PAICTA_Logo.jpg"
     }
   ],
   "featuredVideos": [
@@ -574,15 +581,15 @@
       "title": "Introducing the Digital Skills Factory in South Africa (EN)",
       "publisher": "YouTube",
       "date": "2024-01-01",
-      "summary": "YES and Expleo Digital Skills Factory feature video highlighting the programme's impact and participant stories, including Katlego's journey.",
+      "summary": "YES and Expleo Digital Skills Factory feature video highlighting the programme's impact and participant stories, including my journey.",
       "url": "https://www.youtube.com/watch?v=YvhZwg2N9uQ"
     },
     {
       "title": "PAICTA Hackathon Final Stage Presentation",
       "publisher": "YouTube",
       "date": "2021-09-01",
-      "summary": "Katlego's final-stage hackathon presentation where the team placed second in the competition.",
-      "url": "https://www.youtube.com/watch?v=fGWFK-On3tI"
+      "summary": "My final-stage hackathon presentation where our team placed second in the competition.",
+      "url": "https://www.youtube.com/live/fGWFK-On3tI?si=Y04iUF-eIt4Zu-HL&t=3236"
     }
   ]
 }

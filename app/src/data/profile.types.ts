@@ -72,6 +72,11 @@ export interface ProfileHighlight {
   title: string;
   description: string;
   stats?: ProfileHighlightStat[];
+  dateRange?: string;
+  location?: string;
+  bullets?: string[];
+  image?: string | null;
+  url?: string;
 }
 
 export interface ProfileFeaturedIn {

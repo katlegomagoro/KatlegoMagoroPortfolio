@@ -125,13 +125,64 @@ function socialEntries(profile: Profile) {
   );
 }
 
-function toYouTubeEmbedUrl(url: string): string | null {
+function toYouTubeVideoMeta(url: string): {
+  id: string;
+  embedUrl: string;
+  watchUrl: string;
+  thumbnailUrl: string;
+  startSeconds: number | null;
+} | null {
   try {
     const parsed = new URL(url);
+    const parseStartSeconds = () => {
+      const raw =
+        parsed.searchParams.get("t") ?? parsed.searchParams.get("start");
+      if (!raw) return null;
+      if (/^\d+$/.test(raw)) return Number(raw);
+
+      const match = raw.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$/);
+      if (!match) return null;
+
+      const hours = Number(match[1] ?? 0);
+      const minutes = Number(match[2] ?? 0);
+      const seconds = Number(match[3] ?? 0);
+      const total = hours * 3600 + minutes * 60 + seconds;
+      return total > 0 ? total : null;
+    };
+
+    const startSeconds = parseStartSeconds();
+
+    const buildEmbedUrl = (id: string): string => {
+      const params = new URLSearchParams({
+        rel: "0",
+        modestbranding: "1",
+        playsinline: "1",
+        autoplay: "1",
+        enablejsapi: "1",
+      });
+
+      if (typeof window !== "undefined" && window.location?.origin) {
+        params.set("origin", window.location.origin);
+      }
+
+      if (startSeconds) {
+        params.set("start", String(startSeconds));
+      }
+
+      return `https://www.youtube.com/embed/${id}?${params.toString()}`;
+    };
+
+    const asMeta = (id: string) => ({
+      id,
+      embedUrl: buildEmbedUrl(id),
+      watchUrl: url,
+      thumbnailUrl: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+      startSeconds,
+    });
 
     if (parsed.hostname === "youtu.be") {
       const id = parsed.pathname.slice(1);
-      return id ? `https://www.youtube.com/embed/${id}` : null;
+      return id ? asMeta(id) : null;
     }
 
     if (
@@ -140,11 +191,18 @@ function toYouTubeEmbedUrl(url: string): string | null {
     ) {
       if (parsed.pathname === "/watch") {
         const id = parsed.searchParams.get("v");
-        return id ? `https://www.youtube.com/embed/${id}` : null;
+        return id ? asMeta(id) : null;
+      }
+
+      if (parsed.pathname.startsWith("/live/")) {
+        const id = parsed.pathname.replace("/live/", "");
+        return id ? asMeta(id) : null;
       }
 
       if (parsed.pathname.startsWith("/embed/")) {
-        return url;
+        const pathParts = parsed.pathname.split("/");
+        const id = pathParts[pathParts.length - 1];
+        return id ? asMeta(id) : null;
       }
     }
 
@@ -152,6 +210,152 @@ function toYouTubeEmbedUrl(url: string): string | null {
   } catch {
     return null;
   }
+}
+
+function formatVideoStart(seconds: number | null): string {
+  if (!seconds || seconds <= 0) {
+    return "from start";
+  }
+
+  const minutes = Math.floor(seconds / 60);
+  const remaining = seconds % 60;
+  return `${minutes}:${String(remaining).padStart(2, "0")}`;
+}
+
+function FeaturedVideoPlayer({ title, url }: { title: string; url: string }) {
+  const [playing, setPlaying] = useState(false);
+  const [embedFailed, setEmbedFailed] = useState(false);
+  const [embedReady, setEmbedReady] = useState(false);
+  const meta = toYouTubeVideoMeta(url);
+
+  useEffect(() => {
+    if (!meta) {
+      return;
+    }
+
+    if (!playing) {
+      return;
+    }
+
+    const playerId = `yt-player-${meta.id}`;
+
+    let ready = false;
+    const timeout = window.setTimeout(() => {
+      if (!ready) {
+        setEmbedFailed(true);
+        setPlaying(false);
+        setEmbedReady(false);
+      }
+    }, 6000);
+
+    const handleMessage = (event: MessageEvent) => {
+      if (
+        event.origin !== "https://www.youtube.com" &&
+        event.origin !== "https://www.youtube-nocookie.com"
+      ) {
+        return;
+      }
+
+      let payload: unknown = event.data;
+      if (typeof event.data === "string") {
+        try {
+          payload = JSON.parse(event.data);
+        } catch {
+          return;
+        }
+      }
+
+      if (!payload || typeof payload !== "object") {
+        return;
+      }
+
+      const maybe = payload as { event?: string; id?: string };
+      if (maybe.event === "onReady" && maybe.id === playerId) {
+        ready = true;
+        setEmbedReady(true);
+        window.clearTimeout(timeout);
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => {
+      window.clearTimeout(timeout);
+      window.removeEventListener("message", handleMessage);
+    };
+  }, [meta, playing]);
+
+  if (!meta) {
+    return null;
+  }
+
+  const playerId = `yt-player-${meta.id}`;
+
+  return (
+    <div
+      className="mb-4 overflow-hidden rounded-lg border border-primary/20 bg-black"
+      style={{ aspectRatio: "16 / 9" }}
+    >
+      {playing ? (
+        <div className="relative h-full w-full">
+          <iframe
+            id={playerId}
+            src={meta.embedUrl}
+            title={title}
+            className={`h-full w-full transition-opacity duration-300 ${embedReady ? "opacity-100" : "opacity-0"}`}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+          {!embedReady && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/70 p-4 text-center">
+              <span className="font-mono text-sm text-white/90">
+                Loading player...
+              </span>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="group relative h-full w-full">
+          <img
+            src={meta.thumbnailUrl}
+            alt={title}
+            className="h-full w-full object-cover opacity-80"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/35 p-4 text-center">
+            <button
+              type="button"
+              className="rounded-full border border-white/70 bg-black/60 px-5 py-3 font-mono text-sm text-white"
+              onClick={() => {
+                setEmbedFailed(false);
+                setEmbedReady(false);
+                setPlaying(true);
+              }}
+              aria-label={`Play ${title}`}
+            >
+              Play {formatVideoStart(meta.startSeconds)}
+            </button>
+            {embedFailed && (
+              <>
+                <p className="text-xs text-white/90">
+                  Embedded playback is blocked in this browser session.
+                </p>
+                <a
+                  href={meta.watchUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs text-secondary underline"
+                >
+                  Open directly on YouTube
+                </a>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 function SocialLinks({ profile }: { profile: Profile }) {
@@ -491,24 +695,11 @@ function FeaturedVideosSection({
         title="Featured Videos"
         blurb="Watch interviews, programme features, and hackathon presentation moments directly here."
       />
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="space-y-8">
         {videos.map((video, i) => {
-          const embedUrl = toYouTubeEmbedUrl(video.url);
           return (
-            <article key={i} className="bento-card">
-              {embedUrl ? (
-                <div className="mb-4 overflow-hidden rounded-lg border border-primary/20 bg-black">
-                  <iframe
-                    src={embedUrl}
-                    title={video.title}
-                    className="h-56 w-full md:h-64"
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  />
-                </div>
-              ) : null}
+            <article key={i} className="bento-card mx-auto w-full max-w-4xl">
+              <FeaturedVideoPlayer title={video.title} url={video.url} />
               <h3 className="font-headline text-lg font-semibold text-on-surface">
                 {video.title}
               </h3>
@@ -517,6 +708,10 @@ function FeaturedVideosSection({
               </p>
               <p className="mt-3 text-sm text-on-surface-variant">
                 {video.summary}
+              </p>
+              <p className="mt-3 text-xs text-on-surface-variant">
+                If playback fails in this browser, use Open video to watch
+                directly on YouTube.
               </p>
               <a
                 href={video.url}
@@ -797,12 +992,36 @@ function RecognitionPage({ profile }: { profile: Profile }) {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {profile.highlights.map((highlight, i) => (
                 <article key={i} className="bento-card">
+                  {highlight.image && (
+                    <img
+                      src={resolveAsset(highlight.image) ?? undefined}
+                      alt={highlight.title}
+                      className="mb-4 h-36 w-full rounded-lg object-cover"
+                    />
+                  )}
                   <h3 className="font-headline text-lg font-semibold text-on-surface">
                     {highlight.title}
                   </h3>
+                  {highlight.dateRange && (
+                    <p className="mt-1 font-mono text-xs text-primary">
+                      {highlight.dateRange}
+                    </p>
+                  )}
+                  {highlight.location && (
+                    <p className="mt-1 text-xs text-on-surface-variant">
+                      {highlight.location}
+                    </p>
+                  )}
                   <p className="mt-2 text-sm text-on-surface-variant">
                     {highlight.description}
                   </p>
+                  {highlight.bullets && highlight.bullets.length > 0 && (
+                    <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-on-surface-variant">
+                      {highlight.bullets.map((bullet, j) => (
+                        <li key={j}>{bullet}</li>
+                      ))}
+                    </ul>
+                  )}
                   {highlight.stats && highlight.stats.length > 0 && (
                     <div className="mt-4 flex gap-6">
                       {highlight.stats.map((stat, j) => (
@@ -816,6 +1035,16 @@ function RecognitionPage({ profile }: { profile: Profile }) {
                         </div>
                       ))}
                     </div>
+                  )}
+                  {highlight.url && (
+                    <a
+                      href={highlight.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 inline-block font-mono text-sm text-primary transition-colors hover:text-secondary"
+                    >
+                      Read article →
+                    </a>
                   )}
                 </article>
               ))}
