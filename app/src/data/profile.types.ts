@@ -72,6 +72,11 @@ export interface ProfileHighlight {
   title: string;
   description: string;
   stats?: ProfileHighlightStat[];
+  dateRange?: string;
+  location?: string;
+  bullets?: string[];
+  image?: string | null;
+  url?: string;
 }
 
 export interface ProfileFeaturedIn {
@@ -81,6 +86,14 @@ export interface ProfileFeaturedIn {
   summary: string;
   url: string;
   image?: string | null;
+}
+
+export interface ProfileFeaturedVideo {
+  title: string;
+  publisher: string;
+  date: string;
+  summary: string;
+  url: string;
 }
 
 export interface Profile {
@@ -94,4 +107,5 @@ export interface Profile {
   certifications: ProfileCertification[];
   highlights?: ProfileHighlight[];
   featuredIn?: ProfileFeaturedIn[];
+  featuredVideos?: ProfileFeaturedVideo[];
 }
